@@ -19,19 +19,25 @@ module.exports = function (config) {
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
         // or set a specific seed with `seed: 4321`
+        random: false,
       },
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
+    },
+    preprocessor: {
+      "src/*/!(spec|*mock).js": ["coverage"],
     },
     jasmineHtmlReporter: {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require("path").join(__dirname, "./coverage/final-project"),
+      dir: require("path").join(__dirname, "coverage/"),
       subdir: ".",
-      reporters: [{ type: "lcov" }, { type: "text-summary" }],
+      reporters: [{ type: "text" }, { type: "lcov" }],
     },
     reporters: ["mocha", "kjhtml"],
     browsers: ["Chrome"],
     restartOnFileChange: true,
+    autowatch: true,
+    color: true,
   });
 };
