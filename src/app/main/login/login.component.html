@@ -1,0 +1,47 @@
+<div class="login">
+  <form action="">
+    <h2>LOGIN</h2>
+    <form [formGroup]="formLogin" (ngSubmit)="submit()">
+      <div class="input">
+        <label class="input-box" for="name">
+          <input
+            id="name"
+            type="text"
+            placeholder="Name"
+            formControlName="name"
+          />
+        </label>
+        <label class="input-box" for="email">
+          <input
+            id="email"
+            type="email"
+            placeholder="email"
+            formControlName="email"
+          />
+        </label>
+        <label class="input-box" for="password">
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </label>
+      </div>
+      <div class="remember-forgot">
+        <label for="remember"><input type="checkbox" />Remember me</label>
+        <a href="#" rel="forgot password">Forgot password?</a>
+      </div>
+      <button class="btn" type="submit" [disabled]="formLogin.invalid">
+        Login
+      </button>
+
+      <div class="register-link">
+        <p>
+          Don't have an account?
+          <a href="/register" rel="register">Register</a>
+        </p>
+      </div>
+    </form>
+  </form>
+</div>
