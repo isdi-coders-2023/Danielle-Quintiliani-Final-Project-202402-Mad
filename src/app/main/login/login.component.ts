@@ -15,5 +15,7 @@ export default class LoginComponent {
     password: ['', Validators.required],
     email: ['', Validators.required],
   });
-  submit() {}
+  submit() {
+    console.log(this.formLogin.value);
+  }
 }

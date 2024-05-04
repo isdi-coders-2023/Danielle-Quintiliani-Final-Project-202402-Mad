@@ -28,13 +28,13 @@ const initialState: State = {
 export class StateService {
   private _userState = signal(initialState);
   public userState = this._userState.asReadonly();
-  constructor() {}
 
-  getToken() {}
+
+/*   getToken() {}
 
   setloginState() {}
 
   setLogin() {}
 
-  setlogout() {}
+  setlogout() {} */
 }

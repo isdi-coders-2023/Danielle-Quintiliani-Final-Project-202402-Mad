@@ -4,6 +4,7 @@
     <form [formGroup]="formLogin" (ngSubmit)="submit()">
       <div class="input">
         <label class="input-box" for="name">
+          <span>name</span>
           <input
             id="name"
             type="text"
@@ -12,6 +13,7 @@
           />
         </label>
         <label class="input-box" for="email">
+          <span>email</span>
           <input
             id="email"
             type="email"
@@ -20,6 +22,7 @@
           />
         </label>
         <label class="input-box" for="password">
+          <span>password</span>
           <input
             id="password"
             type="password"
@@ -29,7 +32,10 @@
         </label>
       </div>
       <div class="remember-forgot">
-        <label for="remember"><input type="checkbox" />Remember me</label>
+        <label for="remember"
+          ><input type="checkbox" />
+          <p>Remember me</p></label
+        >
         <a href="#" rel="forgot password">Forgot password?</a>
       </div>
       <button class="btn" type="submit" [disabled]="formLogin.invalid">
@@ -39,7 +45,7 @@
       <div class="register-link">
         <p>
           Don't have an account?
-          <a href="/register" rel="register">Register</a>
+          <a href="/register" rel="register"><p>Register</p></a>
         </p>
       </div>
     </form>

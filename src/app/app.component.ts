@@ -8,7 +8,7 @@ import HomeComponent from './main/home/home.component';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, HomeComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styles: ``,
 })
 export class AppComponent {
   title = 'final-project';
