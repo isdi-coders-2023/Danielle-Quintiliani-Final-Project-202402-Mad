@@ -29,8 +29,8 @@ export class RepoService {
   getById(id: string): Observable<User> {
     return this.httpClient.get(this.url + '/' + id) as Observable<User>;
   }
-  getItem(id: string) {
-    const result = this.httpClient.get(this.url + `${id}/item`);
+  getItem(userId: string) {
+    const result = this.httpClient.get(this.url + userId + '/item');
     return result;
   }
 

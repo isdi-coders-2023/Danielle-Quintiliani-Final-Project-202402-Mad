@@ -7,7 +7,7 @@ export type User = {
   password: string;
   birthday: string;
   avatar: Partial<ImgData> | null;
-  item: [];
+  item?: [];
   role: 'USER' | 'ADMIN' | 'CLUB';
 };
 export type CreateUserDto = {
@@ -26,7 +26,6 @@ export type UserUpdateDto = {
   avatar?: Partial<ImgData> | null;
 };
 export type LoginUserDto = {
-  id: string;
   name: string;
   email?: string;
   password: string;

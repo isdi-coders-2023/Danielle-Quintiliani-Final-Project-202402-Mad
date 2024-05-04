@@ -8,11 +8,12 @@ import {
 import { RepoService } from '../../core/repo/repo.service';
 import { StateService } from '../../core/state/state.service';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, HttpClientModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -22,7 +23,7 @@ export default class RegisterComponent {
   private state = inject(StateService);
   private fb = inject(FormBuilder);
   formRegister = this.fb.group({
-    username: ['admin', Validators.required],
+    name: ['admin', Validators.required],
     password: ['admin', Validators.required],
     email: ['admin@sample.com', Validators.required],
     avatar: [''],
@@ -33,7 +34,7 @@ export default class RegisterComponent {
 
   submit() {
     const formData = new FormData();
-    formData.append('username', this.formRegister.value.username);
+    formData.append('name', this.formRegister.value.username);
     formData.append('password', this.formRegister.value.password);
     formData.append('email', this.formRegister.value.email);
     formData.append('avatar', this.formRegister.value.avatar);
