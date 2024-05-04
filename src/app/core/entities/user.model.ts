@@ -15,7 +15,7 @@ export type CreateUserDto = {
   email: string;
   password: string;
   birthday: string;
-  avatar?: Partial<ImgData> | null;
+  avatar?: File;
 };
 
 export type UserUpdateDto = {
