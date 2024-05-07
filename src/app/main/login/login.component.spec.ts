@@ -12,14 +12,20 @@ import { RepoService } from '../../core/repo/repo.service';
 import { StateService } from '../../core/state/state.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { LoginUserDto } from '../../core/entities/user.model';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let mockRepoService: jasmine.SpyObj<RepoService>;
-  let mockStateService: StateService;
-  let mockRouter: Router;
-
+  /* let mockRepoService: jasmine.SpyObj<RepoService>; */
+  /*   let mockStateService: StateService;
+  let mockRouter: Router; */
+  const mockRepoService = jasmine.createSpyObj('RepoService', ['login']);
+  const mockStateService = jasmine.createSpyObj('StateService', [
+    'setLogin',
+    'setLoginState',
+  ]);
+  const mockRouter = jasmine.createSpyObj('Router', ['navigate']);
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LoginComponent, HttpClientTestingModule, ReactiveFormsModule],
@@ -29,13 +35,7 @@ describe('LoginComponent', () => {
         { provide: Router, useValue: mockRouter },
       ],
     }).compileComponents();
-    mockRepoService = jasmine.createSpyObj('RepoService', ['login']);
-    mockStateService = jasmine.createSpyObj('StateService', [
-      'setLogin',
-      'setLoginState',
-    ]);
-    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-
+    spyOn(console, 'error');
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -45,7 +45,9 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should submit login form successfully', fakeAsync(() => {
-    const token = 'exampleToken';
+    const token = 'mockedToken';
+    mockRepoService.login.and.returnValue(of({ token: token }));
+
     const loginFormData = {
       name: 'test',
       email: 'test@example.com',
@@ -60,20 +62,22 @@ describe('LoginComponent', () => {
     component.submit();
     tick();
 
-    expect(mockRepoService.login).toHaveBeenCalledWith(loginFormData);
+    expect(mockRepoService.login).toHaveBeenCalledWith(
+      loginFormData as LoginUserDto,
+    );
     expect(mockStateService.setLogin).toHaveBeenCalledWith(token);
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/home']);
   }));
 
   it('should handle login error', fakeAsync(() => {
-    const errorMessage = 'Invalid credentials' as unknown as Error;
+    const err = new Error('Invalid credentials');
     const loginFormData = {
       name: 'test',
       email: 'test@example.com',
       password: 'password',
     };
-    mockRepoService.login(loginFormData);
-    mockRepoService.login.and.throwError(errorMessage);
+
+    mockRepoService.login.and.returnValue(throwError(() => err));
 
     component.formLogin.setValue(loginFormData);
 
@@ -82,6 +86,6 @@ describe('LoginComponent', () => {
 
     expect(mockRepoService.login).toHaveBeenCalledWith(loginFormData);
     expect(mockStateService.setLoginState).toHaveBeenCalledWith('error');
-    expect(console.error).toThrowError('Invalid credentials');
+    expect(console.error).toHaveBeenCalled();
   }));
 });

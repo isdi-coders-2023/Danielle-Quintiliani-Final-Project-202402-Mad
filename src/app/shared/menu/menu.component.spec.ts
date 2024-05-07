@@ -8,9 +8,8 @@ describe('MenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MenuComponent]
-    })
-    .compileComponents();
+      imports: [MenuComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,19 @@ describe('MenuComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should toggle burger menu', () => {
+    const emitSpy = spyOn(component.opened, 'emit').and.callThrough();
+    component.active = false;
+    component.onBurgerClicked();
+    const menu = document.querySelector('.menu');
+
+    expect(component.active).toBe(true);
+    expect(menu?.classList.contains('visible')).toBe(true);
+
+    component.onBurgerClicked();
+    expect(component.active).toBe(false);
+    expect(menu?.classList.contains('visible')).toBe(false);
+    expect(emitSpy).toHaveBeenCalled();
   });
 });
