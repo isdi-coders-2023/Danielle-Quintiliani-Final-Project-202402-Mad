@@ -1,1 +1,25 @@
-<img src="../../../assets/Menumenu.webp" alt="menu" height="100" width="100" />
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+
+<nav class="navbar">
+  <div class="container">
+    <div
+      class="burger-menu"
+      (click)="onBurgerClicked()"
+      [class.active]="active"
+      onKeyDown="onBurgerClicked()"
+    >
+      <div class="burger-container">
+        <div class="burger-inner"></div>
+      </div>
+    </div>
+
+    <ul class="menu" [class.active]="active">
+      <li><a href="/login">Login</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/carro">Carro</a></li>
+      <li><a href="/register">Register</a></li>
+    </ul>
+  </div>
+</nav>

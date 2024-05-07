@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { JwtPayload } from 'jsonwebtoken';
 import { User } from '../entities/user.model';
+import { jwtDecode } from 'jwt-decode';
+import { RepoService } from '../repo/repo.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 type LoginState = 'idle' | 'logging' | 'logged' | 'error';
 
 export type Payload = {
@@ -26,15 +30,41 @@ const initialState: State = {
   providedIn: 'root',
 })
 export class StateService {
-  private _userState = signal(initialState);
-  public userState = this._userState.asReadonly();
+  private server = inject(RepoService);
+  public state$ = new BehaviorSubject<State>(initialState);
+  public jwt = jwtDecode;
+  constructor() {}
+  getState(): Observable<State> {
+    return this.state$.asObservable();
+  }
 
+  getToken = (): string | null => this.state$.value.token;
 
-/*   getToken() {}
+  setLoginState(loginState: LoginState): void {
+    this.state$.next({ ...this.state$.value, loginState });
+  }
 
-  setloginState() {}
-
-  setLogin() {}
-
-  setlogout() {} */
+  setLogin(token: string) {
+    const currenPayload: Payload = this.jwt(token);
+    console.log(currenPayload);
+    localStorage.setItem('enDosRoueda', JSON.stringify({ token }));
+    this.server.getById(currenPayload.id).subscribe((data) => {
+      this.state$.next({
+        ...this.state$.value,
+        loginState: 'logged',
+        token,
+        currenPayload,
+        currenUser: data,
+      });
+    });
+  }
+  setLogout() {
+    localStorage.removeItem('enDosRoueda');
+    this.state$.next({
+      ...this.state$.value,
+      loginState: 'idle',
+      token: null,
+      currenPayload: null,
+    });
+  }
 }

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import { Router } from '@angular/router';
 import { RepoService } from '../../core/repo/repo.service';
 import { StateService } from '../../core/state/state.service';
@@ -26,7 +26,7 @@ describe('RegisterComponent', () => {
     mockStateService = {};
 
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, HttpClientModule],
+      imports: [ReactiveFormsModule],
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: RepoService, useValue: mockRepoService },
