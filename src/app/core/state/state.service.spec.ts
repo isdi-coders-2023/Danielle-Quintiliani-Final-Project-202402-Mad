@@ -5,14 +5,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Observable, of } from 'rxjs';
 import { RepoService } from '../repo/repo.service';
 import { jwtDecode } from 'jwt-decode';
-
 describe('StateService', () => {
   let service: StateService;
   let mockServerService: jasmine.SpyObj<RepoService>;
-
   beforeEach(() => {
     mockServerService = jasmine.createSpyObj('ServerService', ['getById']);
-
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -22,7 +19,6 @@ describe('StateService', () => {
     });
     service = TestBed.inject(StateService);
   });
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -44,9 +40,6 @@ describe('StateService', () => {
     });
   });
   it('should setlogin', fakeAsync(() => {
-    /*    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnVzbG1tbDAwMDBvaHpsMWE4dGJuOXEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDk4OTc3NX0.arK_3EXtcYJfe3J9FZB-haFjnsRm3yloBYMq0tTzkkM';
- */
     const token = 'my token';
     const user = {
       id: '123',
@@ -62,15 +55,11 @@ describe('StateService', () => {
       role: user.role,
       iat: 1234567890,
     };
-
     spyOn(localStorage, 'setItem').and.stub();
     spyOn(service, 'jwt').and.returnValue(payload);
-
     mockServerService.getById.and.returnValue(of(user));
-
     service.setLogin(token);
     tick();
-
     expect(service.state$.value.loginState).toEqual('logged');
     expect(service.state$.value.token).toEqual(token);
     expect(service.state$.value.currenPayload).toEqual(payload);
