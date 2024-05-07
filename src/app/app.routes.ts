@@ -17,4 +17,9 @@ export const routes: Routes = [
     title: 'Registration page',
     loadComponent: () => import('./main/register/register.component'),
   },
+  {
+    path: 'profile',
+    title: 'My Profile Page',
+    loadComponent: () => import('./main/profile/profile.component'),
+  },
 ];
