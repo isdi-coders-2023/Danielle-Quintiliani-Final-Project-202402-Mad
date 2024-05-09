@@ -54,5 +54,4 @@ describe('ItemComponent', () => {
     expect(mockStateService.loadItems).toHaveBeenCalled();
     expect(component.item).toEqual(items);
   });
-});
- */
+});*/
