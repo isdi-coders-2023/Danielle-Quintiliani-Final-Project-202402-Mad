@@ -79,18 +79,20 @@ describe('RepoService', () => {
       expect(user).toEqual(mockUser);
     });
 
-    expect(httpClientSpy).toHaveBeenCalledWith(service.url + '/' + userId);
+    expect(httpClientSpy).toHaveBeenCalledWith(
+      service.url + '/user' + '/' + userId,
+    );
   });
 
   it('should retrieve item by id', () => {
-    const userId = '123';
+    const id = '123';
     const mockItem = { id: 'item1', name: 'Test Item' };
 
-    service.getItem(userId).subscribe((item) => {
+    service.getSingleItem(id).subscribe((item) => {
       expect(item).toEqual(mockItem);
     });
 
-    const req = httpMock.expectOne(`${service.url}${userId}/item`);
+    const req = httpMock.expectOne(`${service.url}/items/${id}`);
     expect(req.request.method).toBe('GET');
     req.flush(mockItem);
   });
@@ -104,7 +106,7 @@ describe('RepoService', () => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpMock.expectOne(service.createUrl);
+    const req = httpMock.expectOne(service.url + '/user/register');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(formData);
     req.flush({});

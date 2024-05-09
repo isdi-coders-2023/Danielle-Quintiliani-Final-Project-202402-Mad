@@ -1,1 +1,5 @@
-<p>item works!</p>
+<div class="item">
+  @for (item of this.item; track $index) {
+    <app-item-list [itemInfo]="item"></app-item-list>
+  }
+</div>

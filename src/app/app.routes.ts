@@ -22,4 +22,9 @@ export const routes: Routes = [
     title: 'My Profile Page',
     loadComponent: () => import('./main/profile/profile.component'),
   },
+  {
+    path: 'item',
+    title: 'Item',
+    loadComponent: () => import('./main/item/item.component'),
+  },
 ];

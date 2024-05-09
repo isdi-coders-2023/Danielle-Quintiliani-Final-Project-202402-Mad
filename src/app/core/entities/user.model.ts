@@ -1,4 +1,4 @@
-import { ImgData } from './imgData.model';
+import { Avatar } from './imgData.model';
 
 export type User = {
   id: string;
@@ -6,7 +6,7 @@ export type User = {
   email: string;
   password: string;
   birthday: string;
-  avatar: Partial<ImgData> | null;
+  avatar: Partial<Avatar> | null;
   item?: [];
   role: 'USER' | 'ADMIN' | 'CLUB';
 };
@@ -23,7 +23,7 @@ export type UserUpdateDto = {
   name?: string;
   password?: string;
   birthday?: string;
-  avatar?: Partial<ImgData> | null;
+  avatar?: Partial<Avatar> | null;
 };
 export type LoginUserDto = {
   name: string;

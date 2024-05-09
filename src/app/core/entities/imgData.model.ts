@@ -1,4 +1,6 @@
-export type ImgData = {
+import { Item } from './item.model';
+
+export type Avatar = {
   publicId: string;
   folder: string;
   fieldName: string;
@@ -10,4 +12,9 @@ export type ImgData = {
   width: number;
   height: number;
   bytes: number;
+};
+
+export type ItemImg = Avatar & {
+  item: Item;
+  itemId: string;
 };

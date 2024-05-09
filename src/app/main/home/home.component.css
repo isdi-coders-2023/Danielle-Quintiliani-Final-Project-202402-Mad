@@ -1,6 +1,16 @@
 :host {
   display: flex;
-  height: 479px;
+  height: 600px;
   width: 100%;
   background-color: #e5e5e5;
+  justify-content: center;
+  align-items: center;
+}
+.item {
+  display: flex;
+  justify-content: center;
+  
+  height: 80%;
+  width: 80%;
+  background-color: #ffffff;
 }
