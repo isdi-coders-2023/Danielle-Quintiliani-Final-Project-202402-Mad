@@ -19,12 +19,12 @@ export default class ItemComponent implements OnInit {
 
   ngOnInit() {
     this.state.loadItems();
+
     this.state.getState().subscribe((state) => {
       if (state.item) {
         this.item = state.item;
       }
       console.log('state in item component', state);
     });
-    return this.item;
   }
 }

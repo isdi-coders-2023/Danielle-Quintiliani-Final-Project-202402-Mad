@@ -9,7 +9,6 @@ import { Item } from '../../core/entities/item.model';
   styleUrl: './item-list.component.css',
 })
 export class ItemListComponent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input()
   itemInfo!: Item;
 }

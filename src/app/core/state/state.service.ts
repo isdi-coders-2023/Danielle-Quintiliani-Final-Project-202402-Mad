@@ -7,7 +7,7 @@ import { RepoService } from '../repo/repo.service';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Item } from '../entities/item.model';
 
-type LoginState = 'idle' | 'logging' | 'logged' | 'error';
+export type LoginState = 'idle' | 'logging' | 'logged' | 'error';
 
 export type Payload = JwtPayload & {
   id: string;
