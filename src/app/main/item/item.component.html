@@ -1,0 +1,7 @@
+<ul class="item">
+  @for (item of this.item; track $index) {
+    <li>
+      <app-item-list [itemInfo]="item"></app-item-list>
+    </li>
+  }
+</ul>

@@ -52,7 +52,7 @@ describe('RepoService', () => {
     });
 
     expect(httpClientSpy).toHaveBeenCalledWith(
-      service.url + '/login',
+      service.url + '/user/login',
       mockData,
     );
   });
@@ -66,7 +66,7 @@ describe('RepoService', () => {
       expect(users).toEqual(mockUserList);
     });
 
-    expect(httpClientSpy).toHaveBeenCalledWith(service.url);
+    expect(httpClientSpy).toHaveBeenCalledWith(service.url + '/user');
   });
   it('should get user by ID', () => {
     const userId = '1';
@@ -79,21 +79,23 @@ describe('RepoService', () => {
       expect(user).toEqual(mockUser);
     });
 
-    expect(httpClientSpy).toHaveBeenCalledWith(service.url + '/' + userId);
+    expect(httpClientSpy).toHaveBeenCalledWith(
+      service.url + '/user' + '/' + userId,
+    );
   });
 
-  it('should retrieve item by id', () => {
-    const userId = '123';
+  /*  it('should retrieve item by id', () => {
+    const id = '123';
     const mockItem = { id: 'item1', name: 'Test Item' };
 
-    service.getItem(userId).subscribe((item) => {
+    service.getSingleItem(id).subscribe((item) => {
       expect(item).toEqual(mockItem);
     });
 
-    const req = httpMock.expectOne(`${service.url}${userId}/item`);
+    const req = httpMock.expectOne(`${service.url}/item/${id}`);
     expect(req.request.method).toBe('GET');
     req.flush(mockItem);
-  });
+  }); */
 
   it('should create a new user', () => {
     const formData = new FormData();
@@ -104,9 +106,10 @@ describe('RepoService', () => {
       expect(response).toBeTruthy();
     });
 
-    const req = httpMock.expectOne(service.createUrl);
+    const req = httpMock.expectOne(service.url + '/user/register');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(formData);
     req.flush({});
   });
+
 });

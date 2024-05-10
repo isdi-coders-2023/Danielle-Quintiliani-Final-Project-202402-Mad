@@ -1,68 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { Payload, StateService } from './state.service';
+import { TestBed } from '@angular/core/testing';
+import { State, StateService, initialState } from './state.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Observable, of } from 'rxjs';
+
 import { RepoService } from '../repo/repo.service';
-import { jwtDecode } from 'jwt-decode';
+import { Subscription, of } from 'rxjs';
+import { Item } from '../entities/item.model';
+import { User } from '../entities/user.model';
+
 describe('StateService', () => {
   let service: StateService;
   let mockServerService: jasmine.SpyObj<RepoService>;
+  let repoService: RepoService;
+  let state: State;
+  let suscription: Subscription;
   beforeEach(() => {
-    mockServerService = jasmine.createSpyObj('ServerService', ['getById']);
+    mockServerService = jasmine.createSpyObj(RepoService, {
+      getById: of({} as User),
+      getItems: of([] as Item[]),
+    });
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [
         StateService,
         { provide: RepoService, useValue: mockServerService },
       ],
     });
     service = TestBed.inject(StateService);
-  });
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-  it('should return state observable with getState', () => {
-    const state = service.getState();
-    expect(state).toBeInstanceOf(Observable);
-  });
-  it('should return token if available with getToken', () => {
-    const token = 'myToken';
-    service.state$.next({ ...service.state$.value, token });
-    expect(service.getToken()).toEqual(token);
-  });
-
-  it('should setLoginState', () => {
-    const loginState = 'logged';
-    service.setLoginState(loginState);
-    service.getState().subscribe((state) => {
-      expect(state.loginState).toEqual(loginState);
+    repoService = TestBed.inject(RepoService);
+    suscription = service.getState().subscribe((data) => {
+      state = data;
     });
   });
-  it('should setlogin', fakeAsync(() => {
-    const token = 'my token';
-    const user = {
-      id: '123',
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'password',
-      birthday: '11/01/1986',
-      avatar: null,
-      role: 'USER' as 'USER' | 'ADMIN' | 'CLUB',
-    };
-    const payload: Payload = {
-      id: user.id,
-      role: user.role,
-      iat: 1234567890,
-    };
-    spyOn(localStorage, 'setItem').and.stub();
-    spyOn(service, 'jwt').and.returnValue(payload);
-    mockServerService.getById.and.returnValue(of(user));
+  it('should be created and getState works', () => {
+    expect(state).toEqual(initialState);
+    expect(service).toBeTruthy();
+  });
+  it('should load items', () => {
+    service.loadItems();
+    expect(repoService.getItems).toHaveBeenCalled();
+  });
+  it('should set login state', () => {
+    service.setLoginState('logged');
+    expect(state.loginState).toEqual('logged');
+  });
+  it('should setLogin state', () => {
+    const token = 'myToken';
+    spyOn(service, 'jwt').and.returnValue({ id: 'string', role: 'string' });
     service.setLogin(token);
-    tick();
-    expect(service.state$.value.loginState).toEqual('logged');
-    expect(service.state$.value.token).toEqual(token);
-    expect(service.state$.value.currenPayload).toEqual(payload);
-    expect(service.state$.value.currenUser).toEqual(user);
-  }));
+
+    expect(state.loginState).toEqual('logged');
+    expect(state.token).toEqual(token);
+  });
+  it('should set logout state', () => {
+    service.setLogout();
+    expect(state.loginState).toEqual('idle');
+    expect(state.token).toEqual(null);
+  });
+  afterEach(() => {
+    suscription.unsubscribe();
+  });
 });

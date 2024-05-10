@@ -1,13 +1,13 @@
-<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
-<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
-
 <nav class="navbar">
   <div class="container">
     <div
       class="burger-menu"
       (click)="onBurgerClicked()"
       [class.active]="active"
-      onKeyDown="onBurgerClicked()"
+      (keyup)="onBurgerClicked()"
+      role="button"
+      aria-roledescription="navigation menu"
+      tabindex="0"
     >
       <div class="burger-container">
         <div class="burger-inner"></div>
