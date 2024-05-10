@@ -28,7 +28,6 @@ export default class RegisterComponent {
     avatar: [''],
     birthday: ['', Validators.required],
   }) as FormGroup;
-
   @ViewChild('avatar') avatar!: ElementRef;
 
   submit() {

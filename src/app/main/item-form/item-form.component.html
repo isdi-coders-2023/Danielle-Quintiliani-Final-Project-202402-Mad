@@ -1,0 +1,48 @@
+<div class="login">
+  <form action="">
+    <div class="title">Add Item</div>
+    <form class="form" [formGroup]="addItem" (ngSubmit)="submit()">
+      <div class="input">
+        <label class="input-box" for="title">
+          <span>Title</span>
+          <input
+            id="title"
+            type="text"
+            placeholder="Title"
+            formControlName="title"
+          />
+        </label>
+        <label class="input-box" for="content">
+          <span>Description</span>
+          <textarea
+            id="content"
+            type="text"
+            placeholder="Description"
+            formControlName="content"
+          ></textarea>
+        </label>
+        <label class="input-box" for="price">
+          <span>Price</span>
+          <input
+            id="price"
+            type="number"
+            placeholder="Price"
+            formControlName="price"
+          />
+        </label>
+        <label for="image" class="image">
+          <span>Image</span>
+          <input
+            type="file"
+            #image
+            (change)="onFileChange()"
+            multiple="multiple"
+          />
+        </label>
+      </div>
+      <button class="btn" type="submit" [disabled]="addItem.invalid">
+        Add Item
+      </button>
+    </form>
+  </form>
+</div>

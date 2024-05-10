@@ -27,4 +27,9 @@ export const routes: Routes = [
     title: 'Item',
     loadComponent: () => import('./main/item/item.component'),
   },
+  {
+    path: 'item-form',
+    title: 'Add Item',
+    loadComponent: () => import('./main/item-form/item-form.component'),
+  },
 ];

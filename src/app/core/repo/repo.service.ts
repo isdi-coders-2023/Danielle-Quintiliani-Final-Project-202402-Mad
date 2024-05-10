@@ -46,4 +46,8 @@ export class RepoService {
   createUser(data: FormData) {
     return this.httpClient.post(this.url + '/user/register', data);
   }
+
+  createItem(data: FormData) {
+    return this.httpClient.post(this.url + '/item', data);
+  }
 }

@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import ItemComponent from './item.component';
 import { Payload, State, StateService } from '../../core/state/state.service';
 import { of } from 'rxjs';
-import { Item } from '../../core/entities/item.model';
 import { User } from '../../core/entities/user.model';
+import { Item } from '../../core/entities/item.model';
 
 const state: State = {
   loginState: 'logged',
@@ -36,19 +35,6 @@ describe('ItemComponent', () => {
   });
 
   it('should load items from state on initialization', () => {
-    /*  const items: Item[] = [
-      {
-        id: 'string',
-        title: 'string',
-        content: 'string',
-        price: 'string',
-        ownerItemId: 'string',
-        image: [],
-        createdAt: 'string',
-        owner: 'carlos' as unknown as User,
-      },
-    ]; */
-
     expect(service.loadItems).toHaveBeenCalled();
     expect(component.item).toEqual([] as Item[]);
   });
