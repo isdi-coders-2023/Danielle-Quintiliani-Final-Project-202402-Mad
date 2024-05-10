@@ -21,7 +21,7 @@ export type State = {
   currenUser: User | null;
   item: Item[] | null;
 };
-const initialState: State = {
+export const initialState: State = {
   loginState: 'idle',
   token: null,
   currenPayload: null,
@@ -34,9 +34,8 @@ const initialState: State = {
 })
 export class StateService {
   private server = inject(RepoService);
-  public state$ = new BehaviorSubject<State>(initialState);
-  public jwt = jwtDecode;
-  constructor() {}
+  private state$ = new BehaviorSubject<State>(initialState);
+  jwt = jwtDecode;
 
   getState(): Observable<State> {
     return this.state$.asObservable();
@@ -53,7 +52,6 @@ export class StateService {
       };
       this.state$.next(updatedState);
     });
-    return this.state$.value.item;
   }
 
   setLoginState(loginState: LoginState): void {

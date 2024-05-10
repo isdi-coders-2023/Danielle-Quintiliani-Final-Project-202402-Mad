@@ -1,5 +1,7 @@
-<div class="item">
+<ul class="item">
   @for (item of this.item; track $index) {
-    <app-item-list [itemInfo]="item"></app-item-list>
+    <li>
+      <app-item-list [itemInfo]="item"></app-item-list>
+    </li>
   }
-</div>
+</ul>

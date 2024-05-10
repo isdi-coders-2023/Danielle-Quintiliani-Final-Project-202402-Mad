@@ -11,20 +11,18 @@ import { Item } from '../../core/entities/item.model';
   styleUrl: './item.component.css',
 })
 export default class ItemComponent implements OnInit {
-  public state = inject(StateService);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private state = inject(StateService);
   public item: Item[] = [];
 
   constructor() {}
 
   ngOnInit() {
-    this.state.loadItems();
-
     this.state.getState().subscribe((state) => {
+      console.log(state);
       if (state.item) {
         this.item = state.item;
       }
-      console.log('state in item component', state);
     });
+    this.state.loadItems();
   }
 }
