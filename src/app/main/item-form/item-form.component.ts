@@ -43,8 +43,8 @@ export default class ItemFormComponent {
   }
   onFileChange() {
     const htmlElement: HTMLInputElement = this.image.nativeElement;
-    const file = htmlElement.files!;
-    console.log(file);
-    this.addItem.patchValue([{ image: file }]);
+    const files = htmlElement.files!;
+    console.log(files);
+    this.addItem.patchValue({ image: files });
   }
 }

@@ -58,9 +58,7 @@ describe('RegisterComponent', () => {
     expect(mockRepoService.createUser).toHaveBeenCalledWith(formData);
   });
 
-  //esto test a da controllar de nuevo el lunes. añadito tobeundefined por pasar el sonar y seguir trabajando
   it('should update avatar value in form on file change', () => {
-    /* const mockFile = new File([], 'avatar.jpg'); */
     const inputElement: HTMLInputElement = document.createElement('input');
 
     spyOn(component.avatar, 'nativeElement').and.returnValue(inputElement);
