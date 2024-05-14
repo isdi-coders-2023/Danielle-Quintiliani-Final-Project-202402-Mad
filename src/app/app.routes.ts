@@ -43,6 +43,11 @@ export const routes: Routes = [
     loadComponent: () => import('./main/favorite/favorite.component'),
   },
   {
+    path: 'details/:id',
+    title: 'Details',
+    loadComponent: () => import('./main/details/details.component'),
+  },
+  {
     path: '**',
     title: '404 Page not found',
     loadComponent: () => import('./shared/error/error.component'),

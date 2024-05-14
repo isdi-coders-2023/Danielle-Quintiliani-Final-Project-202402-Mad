@@ -79,6 +79,9 @@
   right: 0;
   background-color: #000000;
 }
+nav {
+  margin-right: 1rem;
+}
 ul {
   li {
     a {

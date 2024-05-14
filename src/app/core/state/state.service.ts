@@ -40,6 +40,15 @@ export class StateService {
   getState(): Observable<State> {
     return this.state$.asObservable();
   }
+  //da provare!
+  getItem(id: string) {
+    if (!id) {
+      this.server.getSingleItem(id).subscribe((item) => {
+        console.log('getItem:', item);
+        return item;
+      });
+    }
+  }
   getCurrentUser = (): User => this.state$.value.currenUser!;
 
   getToken = (): string | null => this.state$.value.token;
