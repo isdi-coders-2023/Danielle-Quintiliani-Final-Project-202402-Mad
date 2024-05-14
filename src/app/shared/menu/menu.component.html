@@ -15,13 +15,13 @@
     </div>
 
     <ul class="menu" [class.active]="active">
-      <li><a routerLink="/login">Login</a></li>
+      <li><a *ngIf="!isLogged" routerLink="/login">Login</a></li>
       <li><a routerLink="/profile">Profile</a></li>
       <li><a routerLink="/home">Home</a></li>
       <li><a routerLink="/item-form">Sell Item</a></li>
       <li><a routerLink="/carro">Carro</a></li>
-      <li><a routerLink="/register">Register</a></li>
-      <li><button (click)="logout()">Logout</button></li>
+      <li><a *ngIf="!isLogged" routerLink="/register">Register</a></li>
+      <li><button *ngIf="isLogged" (click)="logout()">Logout</button></li>
     </ul>
   </div>
 </nav>
