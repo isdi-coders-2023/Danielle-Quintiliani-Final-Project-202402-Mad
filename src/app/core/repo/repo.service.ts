@@ -10,6 +10,7 @@ import { Item } from '../entities/item.model';
 })
 export class RepoService {
   httpClient = inject(HttpClient);
+
   url = environment.apiUrl;
 
   login(_data: LoginUserDto) {
@@ -46,6 +47,6 @@ export class RepoService {
   }
 
   createItem(data: FormData) {
-    return this.httpClient.post(this.url + '/item', data);
+    return this.httpClient.post(this.url + '/item/add', data);
   }
 }

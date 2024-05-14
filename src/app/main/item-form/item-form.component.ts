@@ -25,18 +25,20 @@ export default class ItemFormComponent {
     title: ['', Validators.required],
     content: ['', Validators.required],
     price: ['', Validators.required],
-    image: [''],
+    image: [[]],
   }) as FormGroup;
   @ViewChild('image') image!: ElementRef;
-
+  formData = new FormData();
   submit() {
-    const formData = new FormData();
-    formData.append('title', this.addItem.value.title);
-    formData.append('content', this.addItem.value.content);
-    formData.append('price', this.addItem.value.price.toString());
-    formData.append('image', this.addItem.value.image);
+    this.formData.append('title', this.addItem.value.title);
+    this.formData.append('content', this.addItem.value.content);
+    this.formData.append('price', this.addItem.value.price.toString());
+    this.formData.append(
+      'ownerItemId',
+      this.state.getCurrentUser()?.id.toString(),
+    );
 
-    return this.repo.createItem(formData).subscribe((data) => {
+    return this.repo.createItem(this.formData).subscribe((data) => {
       console.log(data);
       this.router.navigate(['/profile']);
     });
@@ -45,6 +47,9 @@ export default class ItemFormComponent {
     const htmlElement: HTMLInputElement = this.image.nativeElement;
     const files = htmlElement.files!;
     console.log(files);
-    this.addItem.patchValue({ image: files });
+
+    for (let i = 0; i < files.length; i++) {
+      this.formData.append('image', files[i]);
+    }
   }
 }

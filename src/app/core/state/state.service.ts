@@ -40,6 +40,7 @@ export class StateService {
   getState(): Observable<State> {
     return this.state$.asObservable();
   }
+  getCurrentUser = (): User => this.state$.value.currenUser!;
 
   getToken = (): string | null => this.state$.value.token;
 

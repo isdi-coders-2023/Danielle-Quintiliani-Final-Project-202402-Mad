@@ -32,12 +32,7 @@
         </label>
         <label for="image" class="image">
           <span>Image</span>
-          <input
-            type="file"
-            #image
-            (change)="onFileChange()"
-            multiple="multiple"
-          />
+          <input type="file" #image (change)="onFileChange()" multiple />
         </label>
       </div>
       <button class="btn" type="submit" [disabled]="addItem.invalid">
