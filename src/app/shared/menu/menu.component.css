@@ -79,3 +79,11 @@
   right: 0;
   background-color: #000000;
 }
+ul {
+  li {
+    a {
+      color: #ff0000;
+      text-decoration: none;
+    }
+  }
+}
