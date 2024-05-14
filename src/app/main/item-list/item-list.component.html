@@ -1,6 +1,11 @@
 <div>
-  <p>Name: {{ itemInfo.title }}</p>
-  <p>Price: {{ itemInfo.price }}</p>
+  <p>{{ itemInfo.title }}</p>
+  <img
+    [src]="itemInfo.image[0].secureUrl"
+    [alt]="itemInfo.image[0].originalName"
+    height="50px"
+    width="50px"
+  />
+  <p>{{ itemInfo.price }}</p>
   <p>Owner: {{ itemInfo.owner.name }}</p>
-  <p>{{ itemInfo.image }}</p>
 </div>

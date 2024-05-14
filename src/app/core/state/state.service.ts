@@ -60,8 +60,9 @@ export class StateService {
 
   setLogin(token: string) {
     const currenPayload: Payload = this.jwt(token);
-    console.log(currenPayload);
-    localStorage.setItem('enDosRoueda', JSON.stringify({ token }));
+    console.log('State Service Payload', currenPayload);
+    console.log('State Service Token', token);
+    localStorage.setItem('enDosRueda', JSON.stringify({ token }));
     this.server.getById(currenPayload.id).subscribe((data) => {
       this.state$.next({
         ...this.state$.value,

@@ -11,8 +11,6 @@ import { Item } from '../entities/item.model';
 export class RepoService {
   httpClient = inject(HttpClient);
   url = environment.apiUrl;
-  /*   createUrl = environment.apiUrl + '/user/register'; */
-  constructor() {}
 
   login(_data: LoginUserDto) {
     const data = {

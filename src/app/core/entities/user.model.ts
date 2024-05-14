@@ -6,7 +6,7 @@ export type User = {
   email: string;
   password: string;
   birthday: string;
-  avatar: Partial<Avatar> | null;
+  avatar: Avatar | null;
   item?: [];
   role: 'USER' | 'ADMIN' | 'CLUB';
 };

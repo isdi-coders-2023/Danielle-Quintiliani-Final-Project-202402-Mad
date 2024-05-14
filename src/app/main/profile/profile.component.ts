@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { StateService } from '../../core/state/state.service';
+import { User } from '../../core/entities/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
-export default class ProfileComponent {}
+export default class ProfileComponent implements OnInit {
+  stateService = inject(StateService);
+  currentUser: User | null = null;
+
+  ngOnInit(): void {
+    this.stateService.getState().subscribe((state) => {
+      if (state.currenUser) {
+        console.log('profile:', state.currenUser);
+        console.log('image:', state.currenUser.avatar);
+        console.log('item:', state.currenUser.item);
+        this.currentUser = state.currenUser;
+      }
+    });
+  }
+}
