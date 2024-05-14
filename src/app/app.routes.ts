@@ -42,4 +42,9 @@ export const routes: Routes = [
     title: 'My Item on sell',
     loadComponent: () => import('./main/favorite/favorite.component'),
   },
+  {
+    path: '**',
+    title: '404 Page not found',
+    loadComponent: () => import('./shared/error/error.component'),
+  },
 ];
