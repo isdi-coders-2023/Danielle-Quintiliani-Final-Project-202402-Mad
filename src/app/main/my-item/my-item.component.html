@@ -1,6 +1,6 @@
 <div class="body">
-  @if (this.state.getCurrentUser()!.item) {
-    @for (item of this.state.getCurrentUser().item; track $index) {
+  @if (userItems!.length > 0) {
+    @for (item of userItems; track $index) {
       <div class="item">
         <p>{{ item.title }}</p>
         @if (item.image[0]) {

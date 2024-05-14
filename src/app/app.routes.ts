@@ -37,4 +37,9 @@ export const routes: Routes = [
     title: 'My favorite Item',
     loadComponent: () => import('./main/favorite/favorite.component'),
   },
+  {
+    path: 'my_item',
+    title: 'My Item on sell',
+    loadComponent: () => import('./main/favorite/favorite.component'),
+  },
 ];
