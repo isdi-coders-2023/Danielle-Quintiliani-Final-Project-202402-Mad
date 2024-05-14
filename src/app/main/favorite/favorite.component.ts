@@ -10,4 +10,5 @@ import { StateService } from '../../core/state/state.service';
 })
 export default class FavoriteComponent {
   state = inject(StateService);
+  favoriteItems = this.state.getCurrentUser().favorite;
 }

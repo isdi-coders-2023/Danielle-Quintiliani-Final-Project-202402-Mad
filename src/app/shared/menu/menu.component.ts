@@ -46,9 +46,4 @@ export class MenuComponent implements OnInit {
     }
     this.opened.emit();
   }
-
-  logout() {
-    localStorage.removeItem('enDosRueda');
-    window.location.reload();
-  }
 }

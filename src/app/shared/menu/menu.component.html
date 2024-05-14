@@ -21,7 +21,11 @@
       <li><a *ngIf="isLogged" routerLink="/item-form">Sell Item</a></li>
       <li><a *ngIf="isLogged" routerLink="/carro">Carro</a></li>
       <li><a *ngIf="!isLogged" routerLink="/register">Register</a></li>
-      <li><button *ngIf="isLogged" (click)="logout()">Logout</button></li>
+      <li>
+        <button *ngIf="isLogged" (click)="this.state.setLogout()">
+          Logout
+        </button>
+      </li>
     </ul>
   </div>
 </nav>

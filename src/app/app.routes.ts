@@ -40,7 +40,7 @@ export const routes: Routes = [
   {
     path: 'my_item',
     title: 'My Item on sell',
-    loadComponent: () => import('./main/favorite/favorite.component'),
+    loadComponent: () => import('./main/my-item/my-item.component'),
   },
   {
     path: 'details/:id',

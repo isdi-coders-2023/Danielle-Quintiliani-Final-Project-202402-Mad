@@ -8,6 +8,7 @@ export type User = {
   password: string;
   birthday: string;
   avatar: Avatar | null;
+  favorite?: Item[];
   item?: Item[];
   role: 'USER' | 'ADMIN' | 'CLUB';
 };

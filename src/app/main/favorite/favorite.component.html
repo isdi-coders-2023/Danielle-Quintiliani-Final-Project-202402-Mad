@@ -1,6 +1,7 @@
 <div class="body">
-  @if (this.state.getCurrentUser()!.item) {
-    @for (item of this.state.getCurrentUser().item; track $index) {
+  <p>favorite work!</p>
+  @if (favoriteItems !== null) {
+    @for (item of favoriteItems; track $index) {
       <div class="item">
         <p>{{ item.title }}</p>
         @if (item.image[0]) {
@@ -22,5 +23,7 @@
         <p>Owner: {{ item.owner.name }}</p>
       </div>
     }
+  } @else {
+    <p>No favorite items</p>
   }
 </div>

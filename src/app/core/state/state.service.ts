@@ -6,6 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import { RepoService } from '../repo/repo.service';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Item } from '../entities/item.model';
+import { Router } from '@angular/router';
 
 export type LoginState = 'idle' | 'logging' | 'logged' | 'error';
 
@@ -33,6 +34,7 @@ export const initialState: State = {
   providedIn: 'root',
 })
 export class StateService {
+  public router = inject(Router);
   private server = inject(RepoService);
   private state$ = new BehaviorSubject<State>(initialState);
   jwt = jwtDecode;
@@ -84,12 +86,14 @@ export class StateService {
     });
   }
   setLogout() {
-    localStorage.removeItem('enDosRoueda');
+    localStorage.removeItem('enDosRueda');
     this.state$.next({
       ...this.state$.value,
       loginState: 'idle',
       token: null,
       currenPayload: null,
     });
+    this.router.navigate(['/home']);
+    window.location.reload();
   }
 }
