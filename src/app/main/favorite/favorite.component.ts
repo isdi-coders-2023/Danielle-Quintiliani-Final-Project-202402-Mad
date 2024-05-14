@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { StateService } from '../../core/state/state.service';
 
 @Component({
   selector: 'app-favorite',
   standalone: true,
   imports: [],
   templateUrl: './favorite.component.html',
-  styleUrl: './favorite.component.css'
+  styleUrl: './favorite.component.css',
 })
-export class FavoriteComponent {
-
+export default class FavoriteComponent {
+  state = inject(StateService);
+  userItem = this.state.getCurrentUser().item;
 }

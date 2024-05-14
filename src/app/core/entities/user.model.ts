@@ -1,4 +1,5 @@
 import { Avatar } from './imgData.model';
+import { Item } from './item.model';
 
 export type User = {
   id: string;
@@ -7,7 +8,7 @@ export type User = {
   password: string;
   birthday: string;
   avatar: Avatar | null;
-  item?: [];
+  item?: Item[];
   role: 'USER' | 'ADMIN' | 'CLUB';
 };
 export type CreateUserDto = {

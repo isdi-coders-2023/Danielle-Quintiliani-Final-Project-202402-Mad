@@ -32,4 +32,9 @@ export const routes: Routes = [
     title: 'Add Item',
     loadComponent: () => import('./main/item-form/item-form.component'),
   },
+  {
+    path: 'favorites',
+    title: 'My favorite Item',
+    loadComponent: () => import('./main/favorite/favorite.component'),
+  },
 ];

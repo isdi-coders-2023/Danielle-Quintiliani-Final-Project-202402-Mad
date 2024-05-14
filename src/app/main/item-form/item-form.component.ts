@@ -43,6 +43,7 @@ export default class ItemFormComponent {
       this.router.navigate(['/profile']);
     });
   }
+
   onFileChange() {
     const htmlElement: HTMLInputElement = this.image.nativeElement;
     const files = htmlElement.files!;
