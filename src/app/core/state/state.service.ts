@@ -51,6 +51,15 @@ export class StateService {
       });
     }
   }
+  addFavorite(itemId: string) {
+    const currentUser = this.getCurrentUser();
+    if (currentUser) {
+      this.server.addToFavorites(currentUser.id, itemId).subscribe((data) => {
+        console.log('addFavorite:', data);
+        this.state$.next({ ...this.state$.value, currenUser: data });
+      });
+    }
+  }
 
   filterCategory(category: Category) {
     if (category) {
@@ -65,7 +74,6 @@ export class StateService {
       });
     }
   }
-
 
   getCurrentUser = (): User => this.state$.value.currenUser!;
 

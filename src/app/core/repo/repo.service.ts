@@ -44,6 +44,18 @@ export class RepoService {
   filterItems(category: string) {
     return this.httpClient.get(this.url + '/item' + '/category/' + category);
   }
+  addToFavorites(userId: string, itemId: string): Observable<User> {
+    return this.httpClient.post<User>(
+      this.url + '/user/' + userId + '/favorite/' + itemId,
+      {},
+    );
+  }
+
+  removeFromFavorites(userId: string, itemId: string): Observable<User> {
+    return this.httpClient.delete<User>(
+      this.url + '/user/' + userId + '/favorite/' + itemId,
+    );
+  }
 
   createUser(data: FormData) {
     return this.httpClient.post(this.url + '/user/register', data);

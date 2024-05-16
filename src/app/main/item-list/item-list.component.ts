@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { Item } from '../../core/entities/item.model';
 import { Router, RouterLink } from '@angular/router';
+import { StateService } from '../../core/state/state.service';
 
 @Component({
   selector: 'app-item-list',
@@ -11,10 +12,12 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class ItemListComponent {
   router = inject(Router);
+  state = inject(StateService);
   @Input()
   itemInfo!: Item;
 
   goToDeatil(id: string) {
     this.router.navigate(['/deatil', id]);
   }
+  
 }
