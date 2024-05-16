@@ -1,3 +1,7 @@
+<button (click)="sortPriceAsc()">Ascendent</button>
+<button (click)="sortPriceDesc()">Discendent</button>
+<app-filter-btn></app-filter-btn>
+
 <ul class="item">
   @for (item of this.item; track $index) {
     <li>

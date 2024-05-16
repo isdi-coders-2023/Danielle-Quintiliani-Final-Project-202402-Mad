@@ -41,6 +41,9 @@ export class RepoService {
     const result = this.httpClient.get(this.url + '/item' + id);
     return result;
   }
+  filterItems(category: string) {
+    return this.httpClient.get(this.url + '/item' + '/category/' + category);
+  }
 
   createUser(data: FormData) {
     return this.httpClient.post(this.url + '/user/register', data);

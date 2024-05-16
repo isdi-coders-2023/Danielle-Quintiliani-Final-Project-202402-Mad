@@ -7,7 +7,9 @@ export type Item = {
   content: string;
   price: string;
   owner: User;
+  category: Category;
   ownerItemId: string;
   image: ItemImg[];
   createdAt: string;
 };
+export type Category = 'CLOTHES' | 'MOTO' | 'SPAREPARTS' | 'OTHER';

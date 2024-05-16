@@ -5,7 +5,7 @@ import { User } from '../entities/user.model';
 import { jwtDecode } from 'jwt-decode';
 import { RepoService } from '../repo/repo.service';
 import { BehaviorSubject, Observable, take } from 'rxjs';
-import { Item } from '../entities/item.model';
+import { Category, Item } from '../entities/item.model';
 import { Router } from '@angular/router';
 
 export type LoginState = 'idle' | 'logging' | 'logged' | 'error';
@@ -51,6 +51,22 @@ export class StateService {
       });
     }
   }
+
+  filterCategory(category: Category) {
+    if (category) {
+      this.server.filterItems(category).subscribe((data) => {
+        console.log('filter:', data);
+        const currentState = this.state$.getValue();
+        const updatedState: State = {
+          ...currentState,
+          item: data as Item[],
+        };
+        this.state$.next(updatedState);
+      });
+    }
+  }
+
+
   getCurrentUser = (): User => this.state$.value.currenUser!;
 
   getToken = (): string | null => this.state$.value.token;

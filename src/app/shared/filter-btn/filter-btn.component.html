@@ -1,0 +1,8 @@
+<select (change)="filterByCategory($event)">
+  <option value="">Select Category</option>
+  <option value="SPAREPARTS">Spareparts</option>
+  <option value="CLOTHES">Clothes</option>
+  <option value="OTHER">Other</option>
+  <option value="MOTO">Moto</option>
+</select>
+<button (click)="this.state.loadItems()">Show All</button>

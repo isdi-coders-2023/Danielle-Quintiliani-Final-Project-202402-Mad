@@ -15,7 +15,6 @@ export class ItemListComponent {
   itemInfo!: Item;
 
   goToDeatil(id: string) {
-    //go navigate to item detail by id
     this.router.navigate(['/deatil', id]);
   }
 }
