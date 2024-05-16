@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemListComponent } from './item-list.component';
 import { StateService } from '../../core/state/state.service';
 
-describe('ItemListComponent', () => {
+fdescribe('ItemListComponent', () => {
   let component: ItemListComponent;
   let fixture: ComponentFixture<ItemListComponent>;
   let router: Router;
@@ -14,10 +14,11 @@ describe('ItemListComponent', () => {
     stateService = jasmine.createSpyObj('StateService', ['']);
 
     TestBed.configureTestingModule({
-      declarations: [ItemListComponent],
+      imports: [ItemListComponent],
       providers: [
         { provide: Router, useValue: router },
         { provide: StateService, useValue: stateService },
+        { provide: ActivatedRoute, useValue: {} },
       ],
     });
 
