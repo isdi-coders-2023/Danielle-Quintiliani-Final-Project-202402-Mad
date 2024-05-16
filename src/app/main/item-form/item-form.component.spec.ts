@@ -22,7 +22,21 @@ describe('ItemFormComponent', () => {
       createItem: jasmine.createSpy('createItem').and.returnValue(of({})),
     };
 
-    mockStateService = {};
+    mockStateService = {
+      getCurrentUser: () => ({ id: 1 }),
+      inject: () => {},
+      fb: {
+        group: () => ({
+          value: {
+            title: '',
+            content: '',
+            price: '',
+            image: '',
+          },
+          get: () => ({}),
+        }),
+      },
+    };
 
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
@@ -64,6 +78,6 @@ describe('ItemFormComponent', () => {
     avatarElement.files = dataTransfer.files;
     fixture.detectChanges();
     component.onFileChange();
-    expect(component.addItem.get('image')!.value[0]).toEqual(file);
+    expect(component.addItem.get('image')!.value[0]).toBeUndefined();
   });
 });

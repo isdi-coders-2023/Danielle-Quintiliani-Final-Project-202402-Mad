@@ -1,17 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import ProfileComponent from './profile.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterModule, provideRouter } from '@angular/router';
+
+import { StateService } from '../../core/state/state.service';
+import { provideRouter } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
+  let stateServiceMock: jasmine.SpyObj<StateService>;
 
   beforeEach(async () => {
+    stateServiceMock = jasmine.createSpyObj('StateService', {
+      getState: of({ currenUser: { name: 'test' } }),
+    });
     await TestBed.configureTestingModule({
-      imports: [ProfileComponent, HttpClientTestingModule, RouterModule],
-      providers: [provideRouter([])],
+      imports: [ProfileComponent],
+      providers: [
+        provideRouter([]),
+        { provide: StateService, useValue: stateServiceMock },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProfileComponent);
@@ -21,5 +29,10 @@ describe('ProfileComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('getState should be called on ngOnInit', () => {
+    component.ngOnInit();
+    expect(stateServiceMock.getState).toHaveBeenCalled();
   });
 });
