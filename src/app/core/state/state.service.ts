@@ -44,7 +44,7 @@ export class StateService {
   }
   //da provare!
   getItem(id: string) {
-    if (!id) {
+    if (id) {
       this.server.getSingleItem(id).subscribe((item) => {
         console.log('getItem:', item);
         return item;

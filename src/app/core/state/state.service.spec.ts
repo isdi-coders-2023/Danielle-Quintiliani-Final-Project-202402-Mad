@@ -4,7 +4,7 @@ import { State, StateService, initialState } from './state.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { RepoService } from '../repo/repo.service';
-import { Subscription, of } from 'rxjs';
+import { BehaviorSubject, Subscription, of } from 'rxjs';
 import { Item } from '../entities/item.model';
 import { User } from '../entities/user.model';
 import { provideRouter } from '@angular/router';
@@ -22,6 +22,7 @@ describe('StateService', () => {
       getItems: of([] as Item[]),
       getSingleItem: of({} as Item),
       addToFavorites: of({ id: '1', favorite: [] } as unknown as User),
+      filterItems: of([] as Item[]),
     });
     TestBed.configureTestingModule({
       imports: [],
@@ -62,12 +63,12 @@ describe('StateService', () => {
     expect(state.loginState).toEqual('idle');
     expect(state.token).toEqual(null);
   });
-  /* it('should add favorite item', () => {
+  it('should add favorite item', () => {
     const itemId = 'item1';
     const currentUser = { id: 'user1', favorites: [] } as unknown as User;
     const updatedUser = { id: 'user1', favorites: [itemId] } as unknown as User;
     spyOn(service, 'getCurrentUser').and.returnValue(currentUser);
-    //spyOn(repoService, 'addToFavorites').and.returnValue(of(updatedUser));
+    mockServerService.addToFavorites.and.returnValue(of(updatedUser));
 
     service.addFavorite(itemId);
 
@@ -76,13 +77,40 @@ describe('StateService', () => {
       currentUser.id,
       itemId,
     );
-    const user = {
-      id: '1',
-      favorite: ['item1'],
-    } as unknown as User;
-    expect(service.state$.value.currenUser).toEqual(user);
-  }); */
+    expect(service.state$.value.currenUser).toEqual(updatedUser);
+  });
+  it('should filter items by category', () => {
+    const category = 'MOTO';
+    const currentState = {
+      ...initialState,
+      item: [
+        { id: 'item1', category },
+        { id: 'item2', category: 'MOTO' },
+      ] as unknown as Item[],
+    };
+    const updatedState = {
+      ...currentState,
+      item: [{ id: 'item1', category }] as unknown as Item[],
+    };
+    service.state$.next(currentState);
+    mockServerService.filterItems.and.returnValue(of(updatedState.item));
 
+    service.filterCategory(category);
+
+    //expect(service.state$).toHaveBeenCalled();
+    expect(repoService.filterItems).toHaveBeenCalledWith(category);
+    expect(service.state$.value).toEqual(updatedState);
+  });
+  it('should get an item by id', () => {
+    const id = 'item1';
+    const item = { id: 'item1', name: 'Test Item' } as unknown as Item;
+    mockServerService.getSingleItem.and.returnValue(of(item));
+
+    service.getItem(id);
+
+    expect(repoService.getSingleItem).toHaveBeenCalledWith(id);
+    expect([item]).toEqual([item]);
+  });
   afterEach(() => {
     suscription.unsubscribe();
   });
