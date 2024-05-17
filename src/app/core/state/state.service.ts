@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable, inject } from '@angular/core';
 import { JwtPayload } from 'jsonwebtoken';
 import { User } from '../entities/user.model';
 import { jwtDecode } from 'jwt-decode';
 import { RepoService } from '../repo/repo.service';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Category, Item } from '../entities/item.model';
 import { Router } from '@angular/router';
 
@@ -42,7 +41,7 @@ export class StateService {
   getState(): Observable<State> {
     return this.state$.asObservable();
   }
-  //da provare!
+
   getItem(id: string) {
     if (id) {
       this.server.getSingleItem(id).subscribe((item) => {

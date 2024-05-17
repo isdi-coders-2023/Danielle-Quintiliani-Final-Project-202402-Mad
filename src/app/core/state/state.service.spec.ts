@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TestBed } from '@angular/core/testing';
 import { State, StateService, initialState } from './state.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
 import { RepoService } from '../repo/repo.service';
-import { BehaviorSubject, Subscription, of } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { Item } from '../entities/item.model';
 import { User } from '../entities/user.model';
 import { provideRouter } from '@angular/router';
@@ -58,6 +55,11 @@ describe('StateService', () => {
     expect(state.loginState).toEqual('logged');
     expect(state.token).toEqual(token);
   });
+  it('should get token', () => {
+    // service.state$ = of({});
+    const token = service.getToken();
+    expect(token).toBeNull();
+  });
   it('should set logout state', () => {
     service.setLogout();
     expect(state.loginState).toEqual('idle');
@@ -97,7 +99,6 @@ describe('StateService', () => {
 
     service.filterCategory(category);
 
-    //expect(service.state$).toHaveBeenCalled();
     expect(repoService.filterItems).toHaveBeenCalledWith(category);
     expect(service.state$.value).toEqual(updatedState);
   });

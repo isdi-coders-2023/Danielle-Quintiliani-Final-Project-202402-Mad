@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import DetailsComponent from './details.component';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { StateService, initialState } from '../../core/state/state.service';
@@ -32,7 +30,7 @@ describe('DetailsComponent', () => {
           useValue: {
             snapshot: {
               paramMap: {
-                get: (param: string) => 'sample_id',
+                get: () => 'sample_id',
               },
             },
           },

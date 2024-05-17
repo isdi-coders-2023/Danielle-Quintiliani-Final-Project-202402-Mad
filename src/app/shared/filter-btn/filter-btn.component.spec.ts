@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FilterBtnComponent } from './filter-btn.component';
 import { StateService } from '../../core/state/state.service';
 

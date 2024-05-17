@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import FavoriteComponent from './favorite.component';
 import { StateService } from '../../core/state/state.service';
 import { provideRouter } from '@angular/router';

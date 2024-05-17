@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import ProfileComponent from './profile.component';
-
 import { StateService } from '../../core/state/state.service';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
