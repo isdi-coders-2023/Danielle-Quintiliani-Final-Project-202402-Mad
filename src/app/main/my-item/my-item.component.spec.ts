@@ -1,30 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import MyItemComponent from './my-item.component';
 import { StateService } from '../../core/state/state.service';
-import { of } from 'rxjs';
+import MyItemComponent from './my-item.component';
+import { User } from '../../core/entities/user.model';
 
-describe('MyItemComponent', () => {
+fdescribe('MyItemComponent', () => {
   let component: MyItemComponent;
   let fixture: ComponentFixture<MyItemComponent>;
   let stateServiceMock: jasmine.SpyObj<StateService>;
 
   beforeEach(async () => {
-    stateServiceMock = jasmine.createSpyObj('StateService', {
-      getCurrentUser: of({ currenUser: { name: 'test' } }),
+    stateServiceMock = jasmine.createSpyObj('StateService', ['getCurrentUser']);
+    stateServiceMock.getCurrentUser.and.returnValue({
+      id: '1',
+      name: 'test',
+      email: '',
+      password: '',
+      birthday: '',
+      avatar: null,
+      role: 'USER',
+      item: [],
     });
-
     await TestBed.configureTestingModule({
       imports: [MyItemComponent],
       providers: [{ provide: StateService, useValue: stateServiceMock }],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(MyItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MyItemComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should initialize userItems with valid user', () => {
+    const user: User = {
+      id: '1',
+      name: 'test',
+      email: '',
+      password: '',
+      birthday: '',
+      avatar: null,
+      role: 'USER',
+      item: [],
+    };
+    fixture.detectChanges();
+    expect(component.userItems).toEqual(user.item);
   });
 });

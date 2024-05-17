@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ItemListComponent } from './item-list.component';
 import { StateService } from '../../core/state/state.service';
 
-fdescribe('ItemListComponent', () => {
+describe('ItemListComponent', () => {
   let component: ItemListComponent;
   let fixture: ComponentFixture<ItemListComponent>;
   let router: Router;

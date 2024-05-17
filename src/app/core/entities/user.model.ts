@@ -1,7 +1,7 @@
 import { Avatar } from './imgData.model';
 import { Item } from './item.model';
 
-export type User = {
+export interface User {
   id: string;
   name: string;
   email: string;
@@ -11,7 +11,8 @@ export type User = {
   favorite?: Item[];
   item?: Item[];
   role: 'USER' | 'ADMIN' | 'CLUB';
-};
+}
+
 export type CreateUserDto = {
   name: string;
   email: string;
