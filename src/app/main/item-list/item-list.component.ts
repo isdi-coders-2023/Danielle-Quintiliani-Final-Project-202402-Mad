@@ -19,5 +19,5 @@ export class ItemListComponent {
   goToDeatil(id: string) {
     this.router.navigate(['/deatil', id]);
   }
-  
+
 }

@@ -36,7 +36,7 @@ export const initialState: State = {
 export class StateService {
   public router = inject(Router);
   private server = inject(RepoService);
-  private state$ = new BehaviorSubject<State>(initialState);
+  public state$ = new BehaviorSubject<State>(initialState);
   jwt = jwtDecode;
 
   getState(): Observable<State> {
@@ -51,6 +51,7 @@ export class StateService {
       });
     }
   }
+
   addFavorite(itemId: string) {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
