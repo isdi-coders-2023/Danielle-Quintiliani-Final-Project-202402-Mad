@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { Router } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { RepoService } from '../../core/repo/repo.service';
 import { StateService } from '../../core/state/state.service';
 import { of } from 'rxjs';
 import RegisterComponent from './register.component';
+import { routes } from '../../app.routes';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -28,6 +29,7 @@ describe('RegisterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       providers: [
+        provideRouter(routes),
         { provide: Router, useValue: mockRouter },
         { provide: RepoService, useValue: mockRepoService },
         { provide: StateService, useValue: mockStateService },

@@ -84,18 +84,16 @@ describe('RepoService', () => {
     );
   });
 
-  /*  it('should retrieve item by id', () => {
+  it('should retrieve item by id', () => {
     const id = '123';
     const mockItem = { id: 'item1', name: 'Test Item' };
-
     service.getSingleItem(id).subscribe((item) => {
       expect(item).toEqual(mockItem);
     });
-
-    const req = httpMock.expectOne(`${service.url}/item/${id}`);
+    const req = httpMock.expectOne('http://localhost:3400/item123');
     expect(req.request.method).toBe('GET');
     req.flush(mockItem);
-  }); */
+  });
 
   it('should create a new user', () => {
     const formData = new FormData();
@@ -111,5 +109,56 @@ describe('RepoService', () => {
     expect(req.request.body).toEqual(formData);
     req.flush({});
   });
+  it('should filter items by category', () => {
+    const category = 'test';
+    const mockItems = [{ id: 'item1', name: 'Test Item' }];
+    service.filterItems(category).subscribe((items) => {
+      expect(items).toEqual(mockItems);
+    });
+    const req = httpMock.expectOne(
+      service.url + '/item' + '/category/' + category,
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(mockItems);
+  });
+  it('should add item to favorites', () => {
+    const userId = '1';
+    const itemId = 'item1';
+    const mockUser = { id: '1', favorites: ['item1'] } as unknown as User;
+    service.addToFavorites(userId, itemId).subscribe((user) => {
+      expect(user).toEqual(mockUser);
+    });
+    const req = httpMock.expectOne(
+      service.url + '/user/' + userId + '/favorite/' + itemId,
+    );
+    expect(req.request.method).toBe('POST');
+    req.flush(mockUser);
+  });
+  it('should remove item from favorites', () => {
+    const userId = '1';
+    const itemId = 'item1';
+    const mockUser = { id: '1', favorites: [] } as unknown as User;
+    service.removeFromFavorites(userId, itemId).subscribe((user) => {
+      expect(user).toEqual(mockUser);
+    });
+    const req = httpMock.expectOne(
+      service.url + '/user/' + userId + '/favorite/' + itemId,
+    );
+    expect(req.request.method).toBe('DELETE');
+    req.flush(mockUser);
+  });
+  it('should create a new item', () => {
+    const formData = new FormData();
+    formData.append('name', 'testItem');
+    formData.append('price', '100');
 
+    service.createItem(formData).subscribe((response) => {
+      expect(response).toBeTruthy();
+    });
+
+    const req = httpMock.expectOne(service.url + '/item/add');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(formData);
+    req.flush({});
+  });
 });

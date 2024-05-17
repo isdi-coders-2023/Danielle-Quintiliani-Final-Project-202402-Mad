@@ -10,9 +10,8 @@ import { Item } from '../entities/item.model';
 })
 export class RepoService {
   httpClient = inject(HttpClient);
+
   url = environment.apiUrl;
-  /*   createUrl = environment.apiUrl + '/user/register'; */
-  constructor() {}
 
   login(_data: LoginUserDto) {
     const data = {
@@ -42,12 +41,27 @@ export class RepoService {
     const result = this.httpClient.get(this.url + '/item' + id);
     return result;
   }
+  filterItems(category: string) {
+    return this.httpClient.get(this.url + '/item' + '/category/' + category);
+  }
+  addToFavorites(userId: string, itemId: string): Observable<User> {
+    return this.httpClient.post<User>(
+      this.url + '/user/' + userId + '/favorite/' + itemId,
+      {},
+    );
+  }
+
+  removeFromFavorites(userId: string, itemId: string): Observable<User> {
+    return this.httpClient.delete<User>(
+      this.url + '/user/' + userId + '/favorite/' + itemId,
+    );
+  }
 
   createUser(data: FormData) {
     return this.httpClient.post(this.url + '/user/register', data);
   }
 
   createItem(data: FormData) {
-    return this.httpClient.post(this.url + '/item', data);
+    return this.httpClient.post(this.url + '/item/add', data);
   }
 }

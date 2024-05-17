@@ -1,6 +1,19 @@
-<div>
-  <p>Name: {{ itemInfo.title }}</p>
-  <p>Price: {{ itemInfo.price }}</p>
-  <p>Owner: {{ itemInfo.owner.name }}</p>
-  <p>{{ itemInfo.image }}</p>
+<div class="body" [routerLink]="['/details/', itemInfo.id]">
+  <p>{{ itemInfo.title }}</p>
+  @if (itemInfo.image[0]) {
+    <img
+      [src]="itemInfo.image[0].secureUrl"
+      [alt]="itemInfo.image[0].originalName"
+      height="50px"
+      width="50px"
+    />
+  } @else {
+    <img
+      src="../../../assets/image-missing-1178918.webp"
+      alt="miss image"
+      height="50px"
+      width="50px"
+    />
+  }
+  <p>€ {{ itemInfo.price }}</p>
 </div>

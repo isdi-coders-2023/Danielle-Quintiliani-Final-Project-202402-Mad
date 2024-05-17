@@ -1,0 +1,26 @@
+<div class="body">
+  @if (userItems!.length > 0) {
+    @for (item of userItems; track $index) {
+      <div class="item">
+        <p>{{ item.title }}</p>
+        @if (item.image[0]) {
+          <img
+            [src]="item.image[0].secureUrl"
+            [alt]="item.image[0].originalName"
+            height="50px"
+            width="50px"
+          />
+        } @else {
+          <img
+            src="../../../assets/image-missing-1178918.webp"
+            alt="miss image"
+            height="50px"
+            width="50px"
+          />
+        }
+        <p>€ {{ item.price }}</p>
+        <p>Owner: {{ item.owner.name }}</p>
+      </div>
+    }
+  }
+</div>

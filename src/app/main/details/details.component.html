@@ -1,0 +1,15 @@
+<div class="body">
+  <button (click)="this.state.addFavorite(itemInfo.id)">Add favorite</button>
+  <div class="item">
+    <p>{{ itemInfo.title }}</p>
+    <img
+      [src]="itemInfo.image[0].secureUrl"
+      [alt]="itemInfo.image[0].originalName"
+      height="50px"
+      width="50px"
+    />
+    <p>€ {{ itemInfo.price }}</p>
+    <p>Owner: {{ itemInfo.owner.name }}</p>
+  </div>
+</div>
+<p>deails work</p>

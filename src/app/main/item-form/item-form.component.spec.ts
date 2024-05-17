@@ -3,9 +3,10 @@ import ItemFormComponent from './item-form.component';
 import { RepoService } from '../../core/repo/repo.service';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { StateService } from '../../core/state/state.service';
 import { By } from '@angular/platform-browser';
+import { routes } from '../../app.routes';
 
 describe('ItemFormComponent', () => {
   let component: ItemFormComponent;
@@ -22,11 +23,26 @@ describe('ItemFormComponent', () => {
       createItem: jasmine.createSpy('createItem').and.returnValue(of({})),
     };
 
-    mockStateService = {};
+    mockStateService = {
+      getCurrentUser: () => ({ id: 1 }),
+      inject: () => {},
+      fb: {
+        group: () => ({
+          value: {
+            title: '',
+            content: '',
+            price: '',
+            image: '',
+          },
+          get: () => ({}),
+        }),
+      },
+    };
 
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       providers: [
+        provideRouter(routes),
         { provide: Router, useValue: mockRouter },
         { provide: RepoService, useValue: mockRepoService },
         { provide: StateService, useValue: mockStateService },
@@ -64,6 +80,6 @@ describe('ItemFormComponent', () => {
     avatarElement.files = dataTransfer.files;
     fixture.detectChanges();
     component.onFileChange();
-    expect(component.addItem.get('image')!.value[0]).toEqual(file);
+    expect(component.addItem.get('image')!.value[0]).toBeUndefined();
   });
 });

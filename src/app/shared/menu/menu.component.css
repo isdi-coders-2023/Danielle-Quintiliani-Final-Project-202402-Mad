@@ -73,9 +73,20 @@
   gap: 1rem;
   z-index: 1;
   width: 100px;
-  height: 200px;
+  height: 250px;
   position: absolute;
   top: 80px;
   right: 0;
   background-color: #000000;
+}
+nav {
+  margin-right: 1rem;
+}
+ul {
+  li {
+    a {
+      color: #ff0000;
+      text-decoration: none;
+    }
+  }
 }

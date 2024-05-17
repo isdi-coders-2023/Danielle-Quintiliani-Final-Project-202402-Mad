@@ -32,4 +32,24 @@ export const routes: Routes = [
     title: 'Add Item',
     loadComponent: () => import('./main/item-form/item-form.component'),
   },
+  {
+    path: 'favorites',
+    title: 'My favorite Item',
+    loadComponent: () => import('./main/favorite/favorite.component'),
+  },
+  {
+    path: 'my_item',
+    title: 'My Item on sell',
+    loadComponent: () => import('./main/my-item/my-item.component'),
+  },
+  {
+    path: 'details/:id',
+    title: 'Details',
+    loadComponent: () => import('./main/details/details.component'),
+  },
+  {
+    path: '**',
+    title: '404 Page not found',
+    loadComponent: () => import('./shared/error/error.component'),
+  },
 ];
