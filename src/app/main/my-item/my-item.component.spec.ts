@@ -3,7 +3,7 @@ import { StateService } from '../../core/state/state.service';
 import MyItemComponent from './my-item.component';
 import { User } from '../../core/entities/user.model';
 
-fdescribe('MyItemComponent', () => {
+describe('MyItemComponent', () => {
   let component: MyItemComponent;
   let fixture: ComponentFixture<MyItemComponent>;
   let stateServiceMock: jasmine.SpyObj<StateService>;

@@ -1,20 +1,41 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
-import { RouterModule, provideRouter } from '@angular/router';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { StateService } from './core/state/state.service';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  const stateService = jasmine.createSpyObj('StateService', {
+    setLogin: 'isLoggedIn',
+    getState: { isLoggedIn: false },
+  });
+  stateService.getState.and.returnValue(of({ isLoggedIn: false }));
+  stateService.setLogin.and.returnValue(of({ isLoggedIn: true }));
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterModule, HttpClientTestingModule],
-      providers: [provideRouter([])],
+      imports: [AppComponent],
+      providers: [
+        provideRouter(routes),
+        { provide: StateService, useValue: stateService },
+      ],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should set login state on initial load', () => {
+    const token = 'test-token';
+    localStorage.setItem('enDosRueda', JSON.stringify({ token }));
+    fixture.detectChanges();
+    component.initialLogin();
+    expect(stateService.isLoggedIn).toHaveBeenCalled;
+    expect(stateService.setLogin).toHaveBeenCalledWith(token);
   });
 });

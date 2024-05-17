@@ -10,9 +10,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RepoService } from '../../core/repo/repo.service';
 import { StateService } from '../../core/state/state.service';
-import { Router } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { LoginUserDto } from '../../core/entities/user.model';
+import { routes } from '../../app.routes';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -30,6 +31,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LoginComponent, HttpClientTestingModule, ReactiveFormsModule],
       providers: [
+        provideRouter(routes),
         { provide: RepoService, useValue: mockRepoService },
         { provide: StateService, useValue: mockStateService },
         { provide: Router, useValue: mockRouter },

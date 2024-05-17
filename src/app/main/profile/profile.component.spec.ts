@@ -4,6 +4,7 @@ import ProfileComponent from './profile.component';
 import { StateService } from '../../core/state/state.service';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
+import { routes } from '../../app.routes';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -17,7 +18,7 @@ describe('ProfileComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProfileComponent],
       providers: [
-        provideRouter([]),
+        provideRouter(routes),
         { provide: StateService, useValue: stateServiceMock },
       ],
     }).compileComponents();

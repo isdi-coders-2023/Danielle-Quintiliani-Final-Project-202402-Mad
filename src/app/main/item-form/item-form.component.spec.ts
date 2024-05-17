@@ -3,9 +3,10 @@ import ItemFormComponent from './item-form.component';
 import { RepoService } from '../../core/repo/repo.service';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { StateService } from '../../core/state/state.service';
 import { By } from '@angular/platform-browser';
+import { routes } from '../../app.routes';
 
 describe('ItemFormComponent', () => {
   let component: ItemFormComponent;
@@ -41,6 +42,7 @@ describe('ItemFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       providers: [
+        provideRouter(routes),
         { provide: Router, useValue: mockRouter },
         { provide: RepoService, useValue: mockRepoService },
         { provide: StateService, useValue: mockStateService },

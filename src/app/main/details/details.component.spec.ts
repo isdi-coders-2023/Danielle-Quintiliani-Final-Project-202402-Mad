@@ -2,41 +2,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import DetailsComponent from './details.component';
-import { ActivatedRoute, RouterModule, provideRouter } from '@angular/router';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute, provideRouter } from '@angular/router';
 import { StateService, initialState } from '../../core/state/state.service';
 import { Item } from '../../core/entities/item.model';
-const item: Item = {
-  id: '',
-  title: '',
-  content: '',
-  price: '',
-  owner: {
-    id: '',
-    name: '',
-    email: '',
-    password: '',
-    birthday: '',
-    avatar: null,
-    favorite: undefined,
-    item: undefined,
-    role: 'USER',
-  },
-  category: 'CLOTHES',
-  ownerItemId: '',
-  image: [],
-  createdAt: '',
-};
-const mockStateService = jasmine.createSpyObj('StateService', ['getState']);
+import { of } from 'rxjs';
+import { routes } from '../../app.routes';
+
 describe('DetailsComponent', () => {
+  const item = {
+    id: '',
+    title: 'a',
+    image: [{ secureUrl: '', originalName: '' }],
+    owner: { id: '', name: '' },
+  } as Item;
+  const mockStateService = jasmine.createSpyObj('StateService', {
+    getState: of({ ...initialState, item: [item] }),
+  });
+
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetailsComponent, RouterModule, HttpClientTestingModule],
+      imports: [DetailsComponent],
       providers: [
-        provideRouter([]),
+        provideRouter(routes),
         {
           provide: ActivatedRoute,
           useValue: {
@@ -56,6 +46,7 @@ describe('DetailsComponent', () => {
 
     fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;
+    component.itemInfo = item;
     fixture.detectChanges();
   });
 

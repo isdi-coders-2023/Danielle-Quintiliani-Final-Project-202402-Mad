@@ -118,6 +118,5 @@ export class StateService {
       currenPayload: null,
     });
     this.router.navigate(['/home']);
-    window.location.reload();
   }
 }
