@@ -1,16 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-
 import { PaymentService } from './payment.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-  TestRequest,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('PaymentService', () => {
   let service: PaymentService;
-  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,12 +12,7 @@ describe('PaymentService', () => {
       providers: [PaymentService, HttpClientModule],
     });
     service = TestBed.inject(PaymentService);
-    httpMock = TestBed.inject(HttpTestingController);
   });
-  /*  afterEach(() => {
-    httpMock.verify();
-  }); */
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
