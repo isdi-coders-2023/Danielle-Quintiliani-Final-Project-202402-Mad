@@ -1,0 +1,19 @@
+<div class="checkout-container">
+  <button (click)="showCheckoutForm = true">PAY</button>
+  <div [ngStyle]="{ display: showCheckoutForm ? 'block' : 'none' }">
+    <div class="payment-form">
+      <h2>Payment</h2>
+      <label for="card-element">Credit or debit card</label>
+      <div id="card-element"></div>
+      <button (click)="handlePayment(itemInfo.price)">Pay</button>
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    </div>
+    <div id="paymentSuccessModal" class="modal" [ngClass]="{ show: showModal }">
+      <div class="modal-content">
+        <h2>Payment Success</h2>
+        <p>Your payment was successful!</p>
+        <button (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
