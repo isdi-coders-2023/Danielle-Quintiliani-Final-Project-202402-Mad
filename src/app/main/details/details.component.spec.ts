@@ -5,6 +5,7 @@ import { StateService, initialState } from '../../core/state/state.service';
 import { Item } from '../../core/entities/item.model';
 import { of } from 'rxjs';
 import { routes } from '../../app.routes';
+import { PaymentService } from '../../core/payment/payment.service';
 
 describe('DetailsComponent', () => {
   const item = {
@@ -19,6 +20,9 @@ describe('DetailsComponent', () => {
 
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
+  const mockPaymentService = jasmine.createSpyObj('PaymentService', [
+    'createPaymentIntent',
+  ]);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -38,6 +42,10 @@ describe('DetailsComponent', () => {
         {
           provide: StateService,
           useValue: mockStateService,
+        },
+        {
+          provide: PaymentService,
+          useValue: mockPaymentService,
         },
       ],
     }).compileComponents();
