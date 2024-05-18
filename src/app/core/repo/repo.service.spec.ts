@@ -90,7 +90,9 @@ describe('RepoService', () => {
     service.getSingleItem(id).subscribe((item) => {
       expect(item).toEqual(mockItem);
     });
-    const req = httpMock.expectOne('http://localhost:3400/item123');
+    const req = httpMock.expectOne(
+      'https://danielle-quintiliani-final-project.onrender.com/item123',
+    );
     expect(req.request.method).toBe('GET');
     req.flush(mockItem);
   });
