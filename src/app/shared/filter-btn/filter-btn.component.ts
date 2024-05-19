@@ -7,7 +7,7 @@ import { StateService } from '../../core/state/state.service';
   standalone: true,
   imports: [],
   templateUrl: './filter-btn.component.html',
-  styleUrl: './filter-btn.component.css',
+  styles: ``,
 })
 export class FilterBtnComponent {
   categories!: Category;
