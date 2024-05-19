@@ -9,6 +9,7 @@ host {
   color: rgb(0, 0, 0);
   border-radius: 10px;
   padding: 30px 40px;
+  margin-top: 130px;
   h2 {
     font-size: 36px;
     text-align: center;
@@ -39,12 +40,13 @@ host {
     display: flex;
     justify-content: space-between;
     font-size: 14.5px;
+    color: rgb(255, 0, 0);
     label input {
       accent-color: rgb(0, 0, 0);
       margin-right: 3px;
     }
     a {
-      color: rgb(0, 0, 0);
+      color: rgb(255, 0, 0);
       text-decoration: none;
     }
     a:hover {
@@ -68,8 +70,9 @@ host {
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px;
+    color: rgb(255, 0, 0);
     p a {
-      color: rgb(0, 0, 0);
+      color: rgb(255, 0, 0);
       text-decoration: none;
       font-weight: 600;
     }

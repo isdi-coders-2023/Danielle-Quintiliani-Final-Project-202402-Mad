@@ -1,10 +1,9 @@
 <div class="login">
   <form action="">
-    <span>REGISTER</span>
+    <span class="title">REGISTER</span>
     <form [formGroup]="formRegister" (ngSubmit)="submit()">
       <div class="input">
         <label class="input-box" for="name">
-          <span>name</span>
           <input
             id="name"
             type="text"
@@ -13,16 +12,14 @@
           />
         </label>
         <label class="input-box" for="email">
-          <span>email</span>
           <input
             id="email"
             type="email"
-            placeholder="email"
+            placeholder="Email"
             formControlName="email"
           />
         </label>
         <label class="input-box" for="password">
-          <span>password</span>
           <input
             id="password"
             type="password"
@@ -31,11 +28,11 @@
           />
         </label>
         <label for="birthday">
-          <span>Fecha de nacimiento</span>
+          <span class="desc">Birthdate</span>
           <input type="date" formControlName="birthday" />
         </label>
         <label for="avatar">
-          <span>Avatar</span>
+          <span class="desc">Avatar</span>
           <input type="file" #avatar (change)="onFileChange()" />
         </label>
       </div>
