@@ -78,7 +78,7 @@ export class StateService {
   getCurrentUser = (): User => this.state$.value.currenUser!;
 
   getToken = (): string | null => this.state$.value.token;
-
+//load item arg. 50 item
   loadItems() {
     this.server.getItems().subscribe((data) => {
       const currentState = this.state$.getValue();

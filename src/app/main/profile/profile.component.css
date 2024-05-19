@@ -5,7 +5,7 @@
   height: 85vh;
   justify-content: center;
   align-items: center;
-  .body {
+  .bodyProfile {
     display: flex;
     flex-direction: column;
     background-color: white;
