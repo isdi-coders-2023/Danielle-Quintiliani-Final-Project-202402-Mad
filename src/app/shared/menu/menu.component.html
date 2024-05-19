@@ -17,6 +17,8 @@
     <ul class="menu" [class.active]="active">
       <li><a *ngIf="!isLogged" routerLink="/login">Login</a></li>
       <li><a *ngIf="isLogged" routerLink="/profile">Profile</a></li>
+      <li><a *ngIf="isLogged" routerLink="/my_item">My Item</a></li>
+      <li><a *ngIf="isLogged" routerLink="/favorites">Favorites</a></li>
       <li><a routerLink="/home">Home</a></li>
       <li><a *ngIf="isLogged" routerLink="/item-form">Sell Item</a></li>
       <li><a *ngIf="!isLogged" routerLink="/register">Register</a></li>

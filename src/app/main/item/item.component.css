@@ -1,6 +1,20 @@
-.item {
+:host {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  margin-top: 80px;
+
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+  }
 }

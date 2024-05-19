@@ -1,16 +1,14 @@
 :host {
   display: flex;
-  height: 600px;
-  width: 100%;
-  background-color: #e5e5e5;
-  justify-content: center;
-  align-items: center;
-}
-.item {
-  display: flex;
-  justify-content: center;
 
-  height: 80%;
+  width: 100%;
+  background: transparent;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.bodyHome {
+  display: flex;
+  background-color: transparent;
   width: 80%;
-  background-color: #ffffff;
 }

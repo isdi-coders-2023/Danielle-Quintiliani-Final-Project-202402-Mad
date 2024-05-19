@@ -4,9 +4,12 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: #000000;
+  background-color: transparent;
+  position: fixed;
   h1 {
     color: #ff0000;
+    font-weight: 900;
+    font-size: 30px;
   }
   a {
     margin-left: 1rem;

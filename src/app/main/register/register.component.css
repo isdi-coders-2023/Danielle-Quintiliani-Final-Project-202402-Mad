@@ -7,8 +7,10 @@ host {
   border: 2px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: rgb(0, 0, 0);
+  height: 550px;
   border-radius: 10px;
   padding: 30px 40px;
+  margin-top: 53px;
   h2 {
     font-size: 36px;
     text-align: center;
@@ -60,6 +62,7 @@ host {
     font-size: 16px;
     color: #333;
     font-weight: 600;
+    margin-top: 50px;
   }
   .register-link {
     font-size: 14.5px;
@@ -73,5 +76,14 @@ host {
     p a:hover {
       text-decoration: underline;
     }
+  }
+  .title {
+    color: red;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .desc {
+    color: red;
+    padding-top: 1rem;
   }
 }

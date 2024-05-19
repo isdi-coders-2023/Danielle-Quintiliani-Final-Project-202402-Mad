@@ -22,9 +22,9 @@ export default class RegisterComponent {
   private state = inject(StateService);
   private fb = inject(FormBuilder);
   formRegister = this.fb.group({
-    name: ['admin', Validators.required],
-    password: ['admin', Validators.required],
-    email: ['admin@sample.com', Validators.required],
+    name: ['', Validators.required],
+    password: ['', Validators.required],
+    email: ['', Validators.required],
     avatar: [''],
     birthday: ['', Validators.required],
   }) as FormGroup;

@@ -3,6 +3,7 @@ host {
   justify-content: center;
   align-items: center;
   background-color: #d4d4d4;
+  margin-top: 80px;
 }
 span {
   display: none;
@@ -11,7 +12,7 @@ span {
   text-align: center;
   font-size: 30px;
 }
-.login {
+.addItem {
   display: flex;
   justify-content: center;
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -19,6 +20,7 @@ span {
   color: rgb(0, 0, 0);
   border-radius: 10px;
   height: 600px;
+  margin-top: 60px;
   .input-box {
     margin: 30px 0;
     input,

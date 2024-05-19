@@ -9,7 +9,13 @@ import { StateService } from './core/state/state.service';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, HomeComponent],
   templateUrl: './app.component.html',
-  styles: ``,
+  styles: `
+    .body {
+      overflow-y: auto;
+      max-height: 100vh;
+      background-image: url('../assets/backgroundtexture.webp');
+    }
+  `,
 })
 export class AppComponent {
   title = 'final-project';
