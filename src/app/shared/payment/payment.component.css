@@ -3,13 +3,16 @@
 }
 
 .payment-form {
-  width: 400px;
+  width: 310px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0px;
+  left: -220px;
 }
 
 .payment-form h2 {
@@ -130,4 +133,14 @@
 
 .modal-content button:hover {
   background-color: #5469d4;
+}
+.paybtn {
+  background-color: #ff0000;
+  color: white;
+
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
 }

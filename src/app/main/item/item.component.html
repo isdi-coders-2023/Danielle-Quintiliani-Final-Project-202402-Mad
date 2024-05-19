@@ -1,10 +1,10 @@
-<div>
-  <button class="sort" (click)="sortPriceAsc()">Ascendent</button>
-  <button class="sort" (click)="sortPriceDesc()">Discendent</button>
+<div class="btn">
+  <button class="sort" (click)="sortPriceAsc()">Max ↓</button>
+  <button class="sort" (click)="sortPriceDesc()">Min ↑</button>
   <app-filter-btn></app-filter-btn>
 </div>
 
-<div class="card">
+<div class="cardContainer">
   @for (item of this.item; track $index) {
     <app-item-list [itemInfo]="item"></app-item-list>
   }

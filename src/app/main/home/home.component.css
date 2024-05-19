@@ -1,15 +1,14 @@
 :host {
   display: flex;
-  height: 100vh;
+
   width: 100%;
-  background-color: #e5e5e5;
+  background: transparent;
   justify-content: center;
   align-items: flex-start;
-  background-image: url("../../../assets/sfondo.webp");
 }
 
 .bodyHome {
   display: flex;
-  background-color: #ffffff;
+  background-color: transparent;
   width: 80%;
 }

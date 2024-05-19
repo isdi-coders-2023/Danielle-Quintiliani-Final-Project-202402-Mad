@@ -3,12 +3,18 @@
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
-  .card {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  margin-top: 80px;
+
+  .cardContainer {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-    height: 80vh;
+    height: 100vh;
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
   }
 }

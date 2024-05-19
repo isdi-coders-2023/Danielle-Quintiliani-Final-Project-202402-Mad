@@ -1,17 +1,36 @@
-<div class="body">
-  <button (click)="this.state.addFavorite(itemInfo.id)">Add favorite</button>
-  <div class="item">
-    <p>{{ itemInfo.title }}</p>
-    <img
-      [src]="itemInfo.image[0].secureUrl"
-      [alt]="itemInfo.image[0].originalName"
-      height="50px"
-      width="50px"
-    />
-    <p>€ {{ itemInfo.price }}</p>
-    <p>Owner: {{ itemInfo.owner.name }}</p>
+<div class="bodyDetail">
+  <button (click)="this.state.addFavorite(itemInfo.id)">Favorite</button>
+  <div class="detailContent">
+    <div class="detailTitle">
+      <span>{{ itemInfo.title }}</span>
+    </div>
+    <div class="detailItem">
+      @if (itemInfo.image[0]) {
+        @for (item of itemInfo.image; track $index) {
+          <img
+            [src]="itemInfo.image[$index].secureUrl"
+            [alt]="itemInfo.image[$index].originalName"
+            height="100px"
+            width="100px"
+          />
+        }
+      } @else {
+        <img
+          src="../../../assets/image-missing-1178918.webp"
+          alt="miss image"
+          height="90px"
+          width="90px"
+        />
+      }
+    </div>
+    <div class="detailInfo">
+      <span>€ {{ itemInfo.price }}</span>
+      <span class="detailDescription">{{ itemInfo.content }}</span>
+      <span>By: {{ itemInfo.owner.name }}</span>
+    </div>
+
+    <div class="pay">
+      <app-payment [itemInfo]="itemInfo"></app-payment>
+    </div>
   </div>
 </div>
-<p>deails work</p>
-<button>PAY</button>
-<app-payment [itemInfo]="itemInfo"></app-payment>
