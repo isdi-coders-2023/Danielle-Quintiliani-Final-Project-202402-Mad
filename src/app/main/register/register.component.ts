@@ -47,7 +47,6 @@ export default class RegisterComponent {
   onFileChange() {
     const htmlElement: HTMLInputElement = this.avatar.nativeElement;
     const file = htmlElement.files![0];
-    console.log(file);
     this.formRegister.patchValue({ avatar: file });
   }
 }

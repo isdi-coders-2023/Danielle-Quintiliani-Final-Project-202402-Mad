@@ -17,9 +17,6 @@ export default class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.stateService.getState().subscribe((state) => {
       if (state.currenUser) {
-        console.log('profile:', state.currenUser);
-        console.log('image:', state.currenUser.avatar);
-        console.log('item:', state.currenUser.item);
         this.currentUser = state.currenUser;
       }
     });
