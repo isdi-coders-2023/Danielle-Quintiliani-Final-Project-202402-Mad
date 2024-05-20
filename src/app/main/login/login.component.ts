@@ -26,15 +26,13 @@ export default class LoginComponent {
   submit() {
     this.repo.login(this.formLogin.value as LoginUserDto).subscribe({
       next: ({ token }) => {
-        console.log(token);
         this.state.setLogin(token);
-        console.log('Logged in', token);
+
         this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error(err);
         this.state.setLoginState('error');
-        console.log(this.state);
       },
     });
   }

@@ -47,7 +47,6 @@ export default class ItemFormComponent {
   onFileChange() {
     const htmlElement: HTMLInputElement = this.image.nativeElement;
     const files = htmlElement.files!;
-    console.log(files);
 
     for (let i = 0; i < files.length; i++) {
       this.formData.append('image', files[i]);

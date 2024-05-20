@@ -45,7 +45,6 @@ export class StateService {
   getItem(id: string) {
     if (id) {
       this.server.getSingleItem(id).subscribe((item) => {
-        console.log('getItem:', item);
         return item;
       });
     }
@@ -55,7 +54,6 @@ export class StateService {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
       this.server.addToFavorites(currentUser.id, itemId).subscribe((data) => {
-        console.log('addFavorite:', data);
         this.state$.next({ ...this.state$.value, currenUser: data });
       });
     }
@@ -64,7 +62,6 @@ export class StateService {
   filterCategory(category: Category) {
     if (category) {
       this.server.filterItems(category).subscribe((data) => {
-        console.log('filter:', data);
         const currentState = this.state$.getValue();
         const updatedState: State = {
           ...currentState,
@@ -78,7 +75,7 @@ export class StateService {
   getCurrentUser = (): User => this.state$.value.currenUser!;
 
   getToken = (): string | null => this.state$.value.token;
-//load item arg. 50 item
+
   loadItems() {
     this.server.getItems().subscribe((data) => {
       const currentState = this.state$.getValue();
@@ -96,8 +93,7 @@ export class StateService {
 
   setLogin(token: string) {
     const currenPayload: Payload = this.jwt(token);
-    console.log('State Service Payload', currenPayload);
-    console.log('State Service Token', token);
+
     localStorage.setItem('enDosRueda', JSON.stringify({ token }));
     this.server.getById(currenPayload.id).subscribe((data) => {
       this.state$.next({
