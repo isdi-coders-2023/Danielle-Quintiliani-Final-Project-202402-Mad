@@ -17,9 +17,7 @@ import { routes } from '../../app.routes';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  /* let mockRepoService: jasmine.SpyObj<RepoService>; */
-  /*   let mockStateService: StateService;
-  let mockRouter: Router; */
+
   const mockRepoService = jasmine.createSpyObj('RepoService', ['login']);
   const mockStateService = jasmine.createSpyObj('StateService', [
     'setLogin',
