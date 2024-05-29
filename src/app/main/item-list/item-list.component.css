@@ -8,6 +8,9 @@
   background-color: white;
   border: 1px solid #a1a1a1;
   box-shadow: 10px 5px 5px red;
+  img {
+    margin-left: 5px;
+  }
 }
 .cardInfo {
   display: flex;
@@ -27,4 +30,15 @@
   font-size: 20px;
   font-weight: 800;
   margin-bottom: 15px;
+}
+@media (min-width: 600px) {
+  .cardInfo {
+    width: 200px;
+  }
+  .itemBody {
+    width: 360px;
+  }
+  img {
+    margin-left: 10px;
+  }
 }

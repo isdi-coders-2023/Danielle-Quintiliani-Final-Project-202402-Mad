@@ -79,4 +79,34 @@ describe('PaymentComponent', () => {
     });
     expect(component.showModal).toBeTrue();
   });
+  it('should handle payment failure in handlePayment', async () => {
+    const mockConfirmCardPayment = jasmine
+      .createSpy('confirmCardPayment')
+      .and.returnValue(
+        Promise.resolve({ paymentIntent: { status: 'failed' } }),
+      );
+    component.stripe = {
+      confirmCardPayment: mockConfirmCardPayment,
+    } as unknown as Stripe;
+    component.card = {} as StripeCardElement;
+    mockPaymentService.createPaymentIntent.and.returnValue(
+      of({ clientSecret: 'test_secret' }),
+    );
+    spyOn(component.paymentService, 'createPaymentIntent').and.returnValue(
+      of({ clientSecret: 'test_secret' }),
+    );
+    await component.handlePayment('50');
+    expect(component.paymentService.createPaymentIntent).toHaveBeenCalled();
+    expect(mockConfirmCardPayment).toHaveBeenCalledWith('test_secret', {
+      payment_method: { card: component.card },
+    });
+    expect(component.showModal).toBeFalse();
+  });
+  it('should return early if stripe or card are not defined', async () => {
+    component.stripe = null;
+    component.card = null;
+    spyOn(component.paymentService, 'createPaymentIntent');
+    await component.handlePayment('50');
+    expect(component.paymentService.createPaymentIntent).not.toHaveBeenCalled();
+  });
 });

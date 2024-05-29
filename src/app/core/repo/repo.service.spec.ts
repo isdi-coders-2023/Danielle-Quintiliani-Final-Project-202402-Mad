@@ -7,6 +7,7 @@ import { RepoService } from './repo.service';
 import { of } from 'rxjs';
 import { User } from '../entities/user.model';
 import { HttpClientModule } from '@angular/common/http';
+import { Item } from '../entities/item.model';
 const mockedUser = {
   id: '1',
   name: 'name',
@@ -83,7 +84,15 @@ describe('RepoService', () => {
       service.url + '/user' + '/' + userId,
     );
   });
-
+  it('should get items list', () => {
+    const mockItems = [{ id: 'item1', name: 'Test Item' }] as unknown as Item[];
+    service.getItems().subscribe((items) => {
+      expect(items).toEqual(mockItems);
+    });
+    const req = httpMock.expectOne(service.url + '/item');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockItems);
+  });
   it('should retrieve item by id', () => {
     const id = '123';
     const mockItem = { id: 'item1', name: 'Test Item' };
@@ -161,6 +170,16 @@ describe('RepoService', () => {
     const req = httpMock.expectOne(service.url + '/item/add');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(formData);
+    req.flush({});
+  });
+  it('should remove item', () => {
+    const itemId = 'item1';
+    service.removeItem(itemId).subscribe((response) => {
+      expect(response).toBeTruthy();
+    });
+
+    const req = httpMock.expectOne(service.url + '/item/' + itemId);
+    expect(req.request.method).toBe('DELETE');
     req.flush({});
   });
 });
