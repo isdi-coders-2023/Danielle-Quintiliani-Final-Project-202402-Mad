@@ -64,4 +64,8 @@ export class RepoService {
   createItem(data: FormData) {
     return this.httpClient.post(this.url + '/item/add', data);
   }
+
+  removeItem(id: string) {
+    return this.httpClient.delete(this.url + '/item/' + id);
+  }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" appClickOutside (clickOutside)="closeMenu()">
   <div class="container">
     <div
       class="burger-menu"
@@ -7,7 +7,7 @@
       (keyup)="onBurgerClicked()"
       role="button"
       aria-roledescription="navigation menu"
-      tabindex="0"
+      tabindex="100"
     >
       <div class="burger-container">
         <div class="burger-inner"></div>

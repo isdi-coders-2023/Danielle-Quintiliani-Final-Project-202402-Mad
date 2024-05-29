@@ -40,7 +40,7 @@ export default class ItemFormComponent {
 
     return this.repo.createItem(this.formData).subscribe((data) => {
       console.log(data);
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/home']);
     });
   }
 

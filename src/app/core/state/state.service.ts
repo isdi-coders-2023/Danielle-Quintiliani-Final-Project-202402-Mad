@@ -42,12 +42,8 @@ export class StateService {
     return this.state$.asObservable();
   }
 
-  getItem(id: string) {
-    if (id) {
-      this.server.getSingleItem(id).subscribe((item) => {
-        return item;
-      });
-    }
+  getItem(id: string): Observable<Item> {
+    return this.server.getSingleItem(id) as Observable<Item>;
   }
 
   addFavorite(itemId: string) {
@@ -57,6 +53,23 @@ export class StateService {
         this.state$.next({ ...this.state$.value, currenUser: data });
       });
     }
+  }
+
+  removeFavorite(itemId: string) {
+    const currentUser = this.getCurrentUser();
+    if (currentUser) {
+      this.server
+        .removeFromFavorites(currentUser.id, itemId)
+        .subscribe((data) => {
+          this.state$.next({ ...this.state$.value, currenUser: data });
+        });
+    }
+  }
+  removeItem(itemId: string) {
+    this.server.removeItem(itemId).subscribe(() => {
+      this.loadItems();
+      this.router.navigate(['/home']);
+    });
   }
 
   filterCategory(category: Category) {

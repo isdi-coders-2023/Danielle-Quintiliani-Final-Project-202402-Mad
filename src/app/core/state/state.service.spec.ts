@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { State, StateService, initialState } from './state.service';
 import { RepoService } from '../repo/repo.service';
-import { Subscription, of } from 'rxjs';
+import { BehaviorSubject, Subscription, of } from 'rxjs';
 import { Item } from '../entities/item.model';
 import { User } from '../entities/user.model';
 import { provideRouter } from '@angular/router';
@@ -9,17 +9,21 @@ import { routes } from '../../app.routes';
 
 describe('StateService', () => {
   let service: StateService;
+  let stateSubject: BehaviorSubject<State>;
   let mockServerService: jasmine.SpyObj<RepoService>;
   let repoService: RepoService;
   let state: State;
   let suscription: Subscription;
   beforeEach(() => {
+    stateSubject = new BehaviorSubject<State>(initialState);
     mockServerService = jasmine.createSpyObj(RepoService, {
       getById: of({} as User),
-      getItems: of([] as Item[]),
+      getItems: of([] as unknown as Item),
       getSingleItem: of({} as Item),
       addToFavorites: of({ id: '1', favorite: [] } as unknown as User),
       filterItems: of([] as Item[]),
+      removeItem: of({}),
+      removeFromFavorites: of({} as User),
     });
     TestBed.configureTestingModule({
       imports: [],
@@ -27,6 +31,7 @@ describe('StateService', () => {
         provideRouter(routes),
         StateService,
         { provide: RepoService, useValue: mockServerService },
+        { provide: BehaviorSubject, useValue: stateSubject },
       ],
     });
     service = TestBed.inject(StateService);
@@ -56,7 +61,6 @@ describe('StateService', () => {
     expect(state.token).toEqual(token);
   });
   it('should get token', () => {
-    // service.state$ = of({});
     const token = service.getToken();
     expect(token).toBeNull();
   });
@@ -111,6 +115,45 @@ describe('StateService', () => {
 
     expect(repoService.getSingleItem).toHaveBeenCalledWith(id);
     expect([item]).toEqual([item]);
+  });
+  it('should get items', () => {
+    const items = { id: 'item1', name: 'Test Item' } as unknown as Item;
+    mockServerService.getItems.and.returnValue(of([items]));
+
+    service.getItem('item1').subscribe((result) => {
+      expect(result).toEqual({} as unknown as Item);
+    });
+  });
+  it('should remove an item', () => {
+    const itemId = 'item1';
+    spyOn(service, 'loadItems');
+
+    service.removeItem(itemId);
+
+    expect(repoService.removeItem).toHaveBeenCalledWith(itemId);
+    expect(service.loadItems).toHaveBeenCalled();
+  });
+  it('should remove favorite item', () => {
+    const itemId = 'item1';
+    const currentUser = { id: 'user1', favorites: [itemId] } as unknown as User;
+    spyOn(service, 'getCurrentUser').and.returnValue(currentUser);
+
+    service.removeFavorite(itemId);
+
+    expect(service.getCurrentUser).toHaveBeenCalled();
+    expect(repoService.removeFromFavorites).toHaveBeenCalledWith(
+      currentUser.id,
+      itemId,
+    );
+    expect(service.state$.value.currenUser).toEqual({} as unknown as User);
+  });
+  it('should return current user', () => {
+    const currentUser = { id: 'user1', favorite: [] } as unknown as User;
+    stateSubject.next({ ...initialState, currenUser: currentUser });
+
+    const result = service.getCurrentUser();
+
+    expect(result).toBeNull();
   });
   afterEach(() => {
     suscription.unsubscribe();

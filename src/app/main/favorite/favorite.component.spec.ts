@@ -10,6 +10,7 @@ describe('FavoriteComponent', () => {
 
   const stateService = jasmine.createSpyObj('StateService', {
     getCurrentUser: { favorite: [] },
+    removeFavorite: { favorite: ['1'] },
   });
 
   beforeEach(async () => {
@@ -28,5 +29,9 @@ describe('FavoriteComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should remove item from favorites', () => {
+    component.removeFavorite('1');
+    expect(stateService.removeFavorite).toHaveBeenCalledWith('1');
   });
 });

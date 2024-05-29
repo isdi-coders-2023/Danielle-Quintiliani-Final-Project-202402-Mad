@@ -26,7 +26,6 @@ export class PaymentComponent implements OnInit, AfterViewChecked {
   stripe: Stripe | null = null;
   elements: StripeElements | null = null;
   card: StripeCardElement | null = null;
-  errorMessage!: string | null;
   showModal: boolean = false;
   showCheckoutForm: boolean = false;
   paymentService = inject(PaymentService);
@@ -77,7 +76,6 @@ export class PaymentComponent implements OnInit, AfterViewChecked {
       },
       error: (err) => {
         console.error('Error creating payment intent:', err);
-        this.errorMessage = err;
       },
     });
   }

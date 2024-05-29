@@ -11,6 +11,7 @@
 }
 .burger-menu .burger-container .burger-inner {
   position: absolute;
+  z-index: 100;
   width: 22px;
   left: 0px;
   top: 11px;
@@ -63,6 +64,7 @@
   padding: 0;
   margin: 0;
   display: none;
+  z-index: 100;
 }
 
 .menu.visible {
@@ -71,10 +73,11 @@
   justify-content: space-evenly;
   align-items: center;
   gap: 1rem;
-  z-index: 50;
+
   width: 100px;
   height: 250px;
-  position: absolute;
+  position: fixed;
+  z-index: 100;
   top: 80px;
   right: 0;
   background-color: #000000;
