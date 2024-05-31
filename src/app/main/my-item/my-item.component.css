@@ -12,6 +12,8 @@
   font-size: 20px;
   color: #ff0000;
   font-weight: 600;
+  width: 90%;
+  justify-content: space-between;
 }
 .myItemBody {
   display: flex;
@@ -49,7 +51,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 11rem;
+  margin-left: 4rem;
   background-color: white;
   border: solid 1px red;
   cursor: pointer;
